@@ -42,10 +42,7 @@ Meer info: https://stad.gent/cultuur-sport-vrije-tijd/producten/erkenning-sociaa
 * Toevoegen van de ipfs hash aan de 3 velden die encrypted zijn.
 
 # Level 4
-## File upload voor bewijsstukken
 * lijst alle verenigingen met verschillende acceptatiestatus (publiek) 
-* Toevoegen van de ipfs hash aan de 3 velden die encrypted zijn.
-
 
 # Level 5
 ## File upload voor amdmin
