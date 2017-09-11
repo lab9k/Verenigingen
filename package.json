@@ -16,7 +16,5 @@
     "url": "https://github.com/lab9k/Verenigingen/issues"
   },
   "homepage": "https://github.com/lab9k/Verenigingen#readme",
-  "dependencies": {
-    "web3": "^1.0.0-beta.18"
-  }
+  "dependencies": {}
 }
