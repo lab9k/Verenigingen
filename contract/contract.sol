@@ -22,12 +22,16 @@ contract Owned {
         admins[_admin] = false;
     }
 
+    function checkIfAdmin(address _addr) constant returns(bool admin) { 
+        admin = admins[_addr];
+    }
+
 }
 
 
 contract VerenigingenContract is Owned {
 
-    enum Status { ACCEPTED , PENDING , DENIED }
+    enum Status {NULL, ACCEPTED, PENDING, DENIED }
 
     struct Vereniging {
         string naam;
@@ -35,7 +39,7 @@ contract VerenigingenContract is Owned {
         string beschrijving;
         Status status;
     }
-    uint numVerenigingen = 0;
+    uint public numVerenigingen = 0;
     mapping(uint => Vereniging) verenigingen;
 
     function VerenigingenContract() {
@@ -50,20 +54,20 @@ contract VerenigingenContract is Owned {
     }
 
     function denyRequest(uint id) isAdmin {
-        if (verenigingen[id].status != Status.PENDING) {
+        if (verenigingen[id].status == Status.DENIED) {
             revert();
         }
         verenigingen[id].status = Status.DENIED;
     }
 
-    function addVereniging(string _naam, string _ondernemingsnummer, string _beschrijving) {
-        numVerenigingen++;
+    function addVereniging(string _naam, string _ondernemingsnummer, string _beschrijving) isAdmin {
         verenigingen[numVerenigingen] = Vereniging({
             naam:_naam,
             ondernemingsnummer:_ondernemingsnummer,
             beschrijving:_beschrijving,
             status:Status.PENDING
-        });                 
+        });   
+        numVerenigingen++;              
     }
 
     function editVereniging(
@@ -75,6 +79,10 @@ contract VerenigingenContract is Owned {
         verenigingen[id].naam = _naam;
         verenigingen[id].ondernemingsnummer = _ondernemingsnummer;
         verenigingen[id].beschrijving = _beschrijving;
+        verenigingen[id].status = Status.PENDING;
     }
 
+    function getVereniging(uint id) constant returns(string, string, string, Status) {
+        return (verenigingen[id].naam,verenigingen[id].ondernemingsnummer,verenigingen[id].beschrijving,verenigingen[id].status);
+    }
 }
