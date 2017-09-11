@@ -1,0 +1,22 @@
+{
+  "name": "verenigingen",
+  "version": "1.0.0",
+  "description": "Lijst van erkende verenigingen, op de ethereum blockchain. De erkende verenigingen krijgen bepaalde voordelen binnen de stad Gent. Verenigingen kunnen een aanvraag doen en hun erkenning wordt bevestigd door gemeentelijk besluit.  Dit experiment bekijkt of het mogelijk is om een centrale lijst bij te houden van deze verenigingen via de ethereum blockchain.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lab9k/Verenigingen.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lab9k/Verenigingen/issues"
+  },
+  "homepage": "https://github.com/lab9k/Verenigingen#readme",
+  "dependencies": {
+    "web3": "^1.0.0-beta.18"
+  }
+}
