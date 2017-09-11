@@ -16,6 +16,14 @@
       <li><a href="https://github.com/vuejs/vueify" target="_blank">vueify</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
+    <form action="">
+      <div class="search-entity">
+        <input type="text" placeholder="Search for a member" v-model="searchVereniging"/>
+        <div class="input-icon">
+          <i class="fa fa-search"></i>
+        </div>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -25,6 +33,19 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  methods: {
+    searchVereniging: function(keyword) {
+        if (!search) {
+          return;
+        }
+        var rx = new RegExp('"([^"]*'+search+'[^"]*)"','gi');
+        while (result = rx.exec(string)) {
+          results += "\n" + result[1];
+        }
+      return results;
+    },      
     }
   }
 }
