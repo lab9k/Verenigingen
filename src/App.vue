@@ -32,15 +32,59 @@
         <a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a>
       </li>
     </ul>
+    <div class="add-vereniging-form">
+      <label for="vereniging-naam">
+        Naam:
+        <input type="text" id="vereniging-naam">
+      </label>
+      <label for="vereniging-beschrijving">
+        beschrijving:
+        <input type="text" id="vereniging-beschrijving">
+      </label>
+      <label for="vereniging-ondernemingsnummer">
+        Ondernemingsnummer:
+        <input type="text" id="vereniging-ondernemingsnummer">
+      </label>
+      <button id="addVerenigingBtn" v-on:click="addVereniging">Voeg Toe!</button>
+    </div>
   </div>
 </template>
 
 <script>
+const config = {
+  dappInterface: [{ "constant": false, "inputs": [{ "name": "_admin", "type": "address" }], "name": "removeAdmin", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "id", "type": "uint256" }], "name": "acceptRequest", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "id", "type": "uint256" }], "name": "getVereniging", "outputs": [{ "name": "", "type": "string" }, { "name": "", "type": "string" }, { "name": "", "type": "string" }, { "name": "", "type": "uint8" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "_newAdmin", "type": "address" }], "name": "addAdmin", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "id", "type": "uint256" }], "name": "denyRequest", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_naam", "type": "string" }, { "name": "_ondernemingsnummer", "type": "string" }, { "name": "_beschrijving", "type": "string" }], "name": "addVereniging", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "numVerenigingen", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "name": "_addr", "type": "address" }], "name": "checkIfAdmin", "outputs": [{ "name": "admin", "type": "bool" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "id", "type": "uint256" }, { "name": "_naam", "type": "string" }, { "name": "_ondernemingsnummer", "type": "string" }, { "name": "_beschrijving", "type": "string" }], "name": "editVereniging", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }]
+  ,
+  contractAddress: "0xbf5e0215419fede0b159660140f6747013dc1e41",
+}
+if (typeof web3 !== "undefined") {
+  // Use MetaMask's provider
+  window.web3 = new Web3(web3.currentProvider);
+} else {
+  alert("No web3? You should consider trying MetaMask!");
+  // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+}
+const contract = web3.eth.contract(config.dappInterface).at(config.contractAddress);
+
 export default {
   name: 'app',
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+    }
+  },
+  methods: {
+    addVereniging: () => {
+      let naam = document.getElementById("vereniging-naam").value;
+      let beschrijving = document.getElementById("vereniging-beschrijving").value;
+      let ondernemingsnummer = document.getElementById("vereniging-ondernemingsnummer").value;
+      console.log(naam, beschrijving, ondernemingsnummer);
+      contract.addVereniging(naam, ondernemingsnummer, beschrijving, (error, value) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(value);
+        }
+      });
     }
   }
 }
