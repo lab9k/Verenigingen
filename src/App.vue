@@ -32,6 +32,21 @@
         <a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a>
       </li>
     </ul>
+    <div class="add-vereniging-form">
+      <label for="vereniging-naam">
+        Naam:
+        <input type="text" id="vereniging-naam">
+      </label>
+      <label for="vereniging-beschrijving">
+        beschrijving:
+        <input type="text" id="vereniging-beschrijving">
+      </label>
+      <label for="vereniging-ondernemingsnummer">
+        Ondernemingsnummer:
+        <input type="text" id="vereniging-ondernemingsnummer">
+      </label>
+      <button id="addVerenigingBtn" v-on:click="addVereniging">Voeg Toe!</button>
+    </div>
   </div>
 </template>
 
@@ -41,6 +56,14 @@ export default {
   data() {
     return {
       msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  methods: {
+    addVereniging: () => {
+      let naam = document.getElementById("vereniging-naam").value;
+      let beschrijving = document.getElementById("vereniging-beschrijving").value;
+      let ondernemingsnummer = document.getElementById("vereniging-ondernemingsnummer").value;
+      console.log(naam, beschrijving, ondernemingsnummer);
     }
   }
 }
