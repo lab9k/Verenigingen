@@ -8,7 +8,9 @@
     <button v-on:click="search">
       zoek:
     </button>
-    <button v-on:click="fetchVereniging"/>
+    <button v-on:click="fetchVereniging" >
+      Maar dan kunt ge er iets inzetten
+    </button>
     <div class="add-vereniging-form">
       <label for="new-vereniging-naam">
         Naam:
@@ -45,10 +47,9 @@
 <script>
 
 const config = {
-  dappInterface:[{"constant":false,"inputs":[{"name":"_admin","type":"address"}],"name":"removeAdmin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"acceptRequest","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"id","type":"uint256"}],"name":"getVereniging","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newAdmin","type":"address"}],"name":"addAdmin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"denyRequest","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_naam","type":"string"},{"name":"_ondernemingsnummer","type":"string"},{"name":"_beschrijving","type":"string"}],"name":"addVereniging","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"numVerenigingen","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_addr","type":"address"}],"name":"checkIfAdmin","outputs":[{"name":"admin","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"},{"name":"_naam","type":"string"},{"name":"_ondernemingsnummer","type":"string"},{"name":"_beschrijving","type":"string"}],"name":"editVereniging","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"id","type":"uint256"},{"indexed":false,"name":"_naam","type":"string"},{"indexed":false,"name":"_ondernemingsnummer","type":"string"},{"indexed":false,"name":"_beschrijving","type":"string"},{"indexed":false,"name":"datetime","type":"uint256"}],"name":"addVerenigingEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"id","type":"uint256"},{"indexed":false,"name":"_naam","type":"string"},{"indexed":false,"name":"_ondernemingsnummer","type":"string"},{"indexed":false,"name":"_beschrijving","type":"string"},{"indexed":false,"name":"datetime","type":"uint256"}],"name":"editVerenigingEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"id","type":"uint256"},{"indexed":false,"name":"status","type":"uint8"},{"indexed":false,"name":"datetime","type":"uint256"}],"name":"statuschangedEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_newAdmin","type":"address"},{"indexed":false,"name":"dateTime","type":"uint256"}],"name":"addAdminEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_Admin","type":"address"},{"indexed":false,"name":"dateTime","type":"uint256"}],"name":"removeAdminEvent","type":"event"}]
-,
+  dappInterface:[{"constant":false,"inputs":[{"name":"_admin","type":"address"}],"name":"removeAdmin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"acceptRequest","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"id","type":"uint256"}],"name":"getVereniging","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"uint8"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newAdmin","type":"address"}],"name":"addAdmin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"denyRequest","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_naam","type":"string"},{"name":"_ondernemingsnummer","type":"string"},{"name":"_beschrijving","type":"string"}],"name":"addVereniging","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"numVerenigingen","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_addr","type":"address"}],"name":"checkIfAdmin","outputs":[{"name":"admin","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"},{"name":"_naam","type":"string"},{"name":"_ondernemingsnummer","type":"string"},{"name":"_beschrijving","type":"string"}],"name":"editVereniging","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"id","type":"uint256"},{"indexed":false,"name":"_naam","type":"string"},{"indexed":false,"name":"_ondernemingsnummer","type":"string"},{"indexed":false,"name":"_beschrijving","type":"string"},{"indexed":false,"name":"datetime","type":"uint256"}],"name":"addVerenigingEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"id","type":"uint256"},{"indexed":false,"name":"_naam","type":"string"},{"indexed":false,"name":"_ondernemingsnummer","type":"string"},{"indexed":false,"name":"_beschrijving","type":"string"},{"indexed":false,"name":"datetime","type":"uint256"}],"name":"editVerenigingEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"id","type":"uint256"},{"indexed":false,"name":"status","type":"uint8"},{"indexed":false,"name":"datetime","type":"uint256"}],"name":"statuschangedEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_newAdmin","type":"address"},{"indexed":false,"name":"dateTime","type":"uint256"}],"name":"addAdminEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_Admin","type":"address"},{"indexed":false,"name":"dateTime","type":"uint256"}],"name":"removeAdminEvent","type":"event"}],
 
-  contractAddress: "0x5501906bdbb9e78b616b13ac8ebe2d90da9c2a91",
+  contractAddress: "0x91bc4e5851b9cf25dac9a39f567fb94236c6dce0",
 }
 if (typeof web3 !== "undefined") {
   // Use MetaMask's provider
@@ -97,7 +98,7 @@ export default {
     },
     fetchVereniging: () => {
       verenigingList.splice(0,verenigingList.length)
-      contract.getNumVerenigingen(function(err, res){
+      contract.numVerenigingen.call(function(err, res){
         for (var i = 0; i < res.c[0]; i++) {
           contract.getVereniging(i, (err, res) => {
             verenigingList.push(res);
@@ -105,16 +106,11 @@ export default {
         }
 
       });
-    }
-  },
-  methods: {
+    },
     searchVereniging: function(keyword, list) {
         var results = []
         var rx = new RegExp('.*' + keyword + '.*');
         for (var woord of list){
-          console.log(woord);
-          console.log(rx);
-          console.log(rx.test(woord[0]));
           if (rx.test(woord[0])){
             results.push(woord)
           }
