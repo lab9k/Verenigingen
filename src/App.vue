@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img src="http://vuejs.org/images/logo.png">
-    <h1>\{{ msg }}</h1>
+    <h1>\{{ verenigingList }}</h1>
     <h2>Essential Links</h2>
     <ul>
       <li>
@@ -32,6 +32,7 @@
         <a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a>
       </li>
     </ul>
+    <button v-on:click="fetchVereniging"/>
     <div class="add-vereniging-form">
       <label for="vereniging-naam">
         Naam:
@@ -52,9 +53,9 @@
 
 <script>
 const config = {
-  dappInterface: [{ "constant": false, "inputs": [{ "name": "_admin", "type": "address" }], "name": "removeAdmin", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "id", "type": "uint256" }], "name": "acceptRequest", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "id", "type": "uint256" }], "name": "getVereniging", "outputs": [{ "name": "", "type": "string" }, { "name": "", "type": "string" }, { "name": "", "type": "string" }, { "name": "", "type": "uint8" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "_newAdmin", "type": "address" }], "name": "addAdmin", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "id", "type": "uint256" }], "name": "denyRequest", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_naam", "type": "string" }, { "name": "_ondernemingsnummer", "type": "string" }, { "name": "_beschrijving", "type": "string" }], "name": "addVereniging", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "numVerenigingen", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "name": "_addr", "type": "address" }], "name": "checkIfAdmin", "outputs": [{ "name": "admin", "type": "bool" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "id", "type": "uint256" }, { "name": "_naam", "type": "string" }, { "name": "_ondernemingsnummer", "type": "string" }, { "name": "_beschrijving", "type": "string" }], "name": "editVereniging", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }]
-  ,
-  contractAddress: "0xbf5e0215419fede0b159660140f6747013dc1e41",
+  dappInterface:[{"constant":false,"inputs":[{"name":"_admin","type":"address"}],"name":"removeAdmin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"acceptRequest","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"id","type":"uint256"}],"name":"getVereniging","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newAdmin","type":"address"}],"name":"addAdmin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"denyRequest","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_naam","type":"string"},{"name":"_ondernemingsnummer","type":"string"},{"name":"_beschrijving","type":"string"}],"name":"addVereniging","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"numVerenigingen","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getNumVerenigingen","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_addr","type":"address"}],"name":"checkIfAdmin","outputs":[{"name":"admin","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"},{"name":"_naam","type":"string"},{"name":"_ondernemingsnummer","type":"string"},{"name":"_beschrijving","type":"string"}],"name":"editVereniging","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}],
+
+  contractAddress: "0x94d7e46389d7d81a9ecdfbb2f0331f7f22c06edf",
 }
 if (typeof web3 !== "undefined") {
   // Use MetaMask's provider
@@ -70,6 +71,7 @@ export default {
   data() {
     return {
       msg: 'Welcome to Your Vue.js App',
+      verenigingList: []
     }
   },
   methods: {
@@ -85,6 +87,21 @@ export default {
           console.log(value);
         }
       });
+    },
+    fetchVereniging: () => {
+      var result = []
+      contract.getNumVerenigingen(function(err, res){
+        for (var i = 0; i < res.c[0]; i++) {
+          contract.getVereniging(i, (err, res) => {
+            result.push(res);
+          })
+        }
+      });
+      setTimeout(function () {
+        console.log('hey');
+        this.verenigingList = result
+        console.log(this.verenigingList);
+      }, 1000);
     }
   }
 }
