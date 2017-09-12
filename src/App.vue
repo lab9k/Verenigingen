@@ -3,7 +3,7 @@
     <img src="http://vuejs.org/images/logo.png">
     <h1>{{ lijst }}</h1>
     <h2>Essential Links</h2>
-    
+
     <input type="text" id="inputveld"/>
     <button v-on:click="search">
       zoek:
@@ -59,7 +59,7 @@ if (typeof web3 !== "undefined") {
 }
 const contract = web3.eth.contract(config.dappInterface).at(config.contractAddress);
 const verenigingList = []
->>>>>>> develop
+
 export default {
   name: 'app',
   data() {
