@@ -79,8 +79,37 @@ if (typeof web3 !== "undefined") {
   alert("No web3? You should consider trying MetaMask!");
   // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
 }
+
 const contract = web3.eth.contract(config.dappInterface).at(config.contractAddress);
 const verenigingList = []
+
+let addVerenigingEvent = clientReceipt.addVerenigingEvent(function(error, result) {
+    if (!error)
+        console.log(result);
+});
+
+let editVerenigingEvent = clientReceipt.editVerenigingEvent(function(error, result) {
+    if (!error)
+        console.log(result);
+});
+
+let statuschangedEvent = clientReceipt.statuschangedEvent(function(error, result) {
+    if (!error)
+        console.log(result);
+});
+
+let addAdminEvent = clientReceipt.addAdminEvent(function(error, result) {
+    if (!error)
+        console.log(result);
+});
+
+let removeAdminEvent = clientReceipt.removeAdminEvent(function(error, result) {
+    if (!error)
+        console.log(result);
+});
+
+
+
 export default {
   name: 'app',
   data() {
