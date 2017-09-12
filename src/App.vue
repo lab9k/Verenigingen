@@ -71,9 +71,7 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 
-=======
 const config = {
   dappInterface:[{"constant":false,"inputs":[{"name":"_admin","type":"address"}],"name":"removeAdmin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"acceptRequest","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"id","type":"uint256"}],"name":"getVereniging","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newAdmin","type":"address"}],"name":"addAdmin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"denyRequest","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_naam","type":"string"},{"name":"_ondernemingsnummer","type":"string"},{"name":"_beschrijving","type":"string"}],"name":"addVereniging","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"numVerenigingen","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_addr","type":"address"}],"name":"checkIfAdmin","outputs":[{"name":"admin","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"},{"name":"_naam","type":"string"},{"name":"_ondernemingsnummer","type":"string"},{"name":"_beschrijving","type":"string"}],"name":"editVereniging","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"id","type":"uint256"},{"indexed":false,"name":"_naam","type":"string"},{"indexed":false,"name":"_ondernemingsnummer","type":"string"},{"indexed":false,"name":"_beschrijving","type":"string"},{"indexed":false,"name":"datetime","type":"uint256"}],"name":"addVerenigingEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"id","type":"uint256"},{"indexed":false,"name":"_naam","type":"string"},{"indexed":false,"name":"_ondernemingsnummer","type":"string"},{"indexed":false,"name":"_beschrijving","type":"string"},{"indexed":false,"name":"datetime","type":"uint256"}],"name":"editVerenigingEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"id","type":"uint256"},{"indexed":false,"name":"status","type":"uint8"},{"indexed":false,"name":"datetime","type":"uint256"}],"name":"statuschangedEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_newAdmin","type":"address"},{"indexed":false,"name":"dateTime","type":"uint256"}],"name":"addAdminEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_Admin","type":"address"},{"indexed":false,"name":"dateTime","type":"uint256"}],"name":"removeAdminEvent","type":"event"}]
 ,
@@ -87,9 +85,35 @@ if (typeof web3 !== "undefined") {
   alert("No web3? You should consider trying MetaMask!");
   // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
 }
+
 const contract = web3.eth.contract(config.dappInterface).at(config.contractAddress);
 const verenigingList = []
->>>>>>> develop
+
+let addVerenigingEvent = clientReceipt.addVerenigingEvent(function(error, result) {
+    if (!error)
+        console.log(result);
+});
+
+let editVerenigingEvent = clientReceipt.editVerenigingEvent(function(error, result) {
+    if (!error)
+        console.log(result);
+});
+
+let statuschangedEvent = clientReceipt.statuschangedEvent(function(error, result) {
+    if (!error)
+        console.log(result);
+});
+
+let addAdminEvent = clientReceipt.addAdminEvent(function(error, result) {
+    if (!error)
+        console.log(result);
+});
+
+let removeAdminEvent = clientReceipt.removeAdminEvent(function(error, result) {
+    if (!error)
+        console.log(result);
+});
+
 export default {
   name: 'app',
   data() {
