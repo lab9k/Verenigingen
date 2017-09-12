@@ -5,6 +5,9 @@ contract Owned {
 
     mapping(address => bool) admins;
 
+    event addAdminEvent(address _newAdmin, uint now);
+    event removeAdminEvent(address _Admin, uint now);
+
     function Owned() {
         admins[msg.sender] = true;
     }
@@ -16,10 +19,12 @@ contract Owned {
 
     function addAdmin(address _newAdmin) isAdmin {
         admins[_newAdmin] = true;
+        addAdminEvent(_newAdmin, now);
     }
 
     function removeAdmin(address _admin) isAdmin {
         admins[_admin] = false;
+        removeAdminEvent(_Admin, now);
     }
 
     function checkIfAdmin(address _addr) constant returns(bool admin) { 
@@ -42,6 +47,11 @@ contract VerenigingenContract is Owned {
     uint public numVerenigingen = 0;
     mapping(uint => Vereniging) verenigingen;
 
+    event addVerenigingEvent(uint id, string _naam, string _ondernemingsnummer, string _beschrijving, uint datetime);
+    event editVerenigingEvent(uint id, string _naam, string _ondernemingsnummer, string _beschrijving, uint datetime);
+    event statuschangedEvent(uint id, uint tatus, uint datetime);
+
+
     function VerenigingenContract() {
         
     }
@@ -51,6 +61,7 @@ contract VerenigingenContract is Owned {
             revert();
         }
         verenigingen[id].status = Status.ACCEPTED;
+        statuschangedEvent(id, Status.ACCEPTED, now);
     }
 
     function denyRequest(uint id) isAdmin {
@@ -58,6 +69,7 @@ contract VerenigingenContract is Owned {
             revert();
         }
         verenigingen[id].status = Status.DENIED;
+        statuschangedEvent(id, Status.DENIED, now);
     }
 
     function addVereniging(string _naam, string _ondernemingsnummer, string _beschrijving) isAdmin {
@@ -66,7 +78,8 @@ contract VerenigingenContract is Owned {
             ondernemingsnummer:_ondernemingsnummer,
             beschrijving:_beschrijving,
             status:Status.PENDING
-        });   
+        });
+        addVerenigingEvent(numVerenigingen, _naam, _ondernemingsnummer, _beschrijving, now);
         numVerenigingen++;              
     }
 
@@ -80,6 +93,8 @@ contract VerenigingenContract is Owned {
         verenigingen[id].ondernemingsnummer = _ondernemingsnummer;
         verenigingen[id].beschrijving = _beschrijving;
         verenigingen[id].status = Status.PENDING;
+
+        editVerenigingEvent(id, _naam, _ondernemingsnummer, _beschrijving, now);
     }
 
     function getVereniging(uint id) constant returns(string, string, string, Status) {
