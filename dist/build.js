@@ -1,1 +1,0 @@
-console.error("SyntaxError: /home/bert/lab9k/Verenigingen/src/App.vue: Unexpected token (51:0) while parsing file: /home/bert/lab9k/Verenigingen/src/App.vue");
