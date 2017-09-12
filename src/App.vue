@@ -26,7 +26,6 @@
       </label>
       <button id="addVerenigingBtn" v-on:click="addVereniging">Voeg Toe!</button>
     </div>
-<<<<<<< HEAD
     <div class="edit-vereniging-form">
       <label for="edit-vereniging-naam">
         Naam:
@@ -42,8 +41,6 @@
       </label>
       <button id="editVerenigingBtn" v-on:click="addVereniging">Voeg Toe!</button>
     </div>
-=======
->>>>>>> 52a9c693296943afd3a5e97248dd8b47396cb26a
     <div class="accept-deny">
       <label for="Vereniging-id">Id:</label>
       <input type="text" id="Vereniging-id" placeholder="10"></input>
