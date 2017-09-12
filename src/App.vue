@@ -69,6 +69,9 @@ export default {
       lijst: verenigingList
     }
   },
+  mounted: function(){
+    this.fetchVereniging()
+  },
   methods: {
     addVereniging: () => {
       let naam = document.getElementById("new-vereniging-naam").value;
