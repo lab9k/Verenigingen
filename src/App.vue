@@ -25,9 +25,6 @@
 
 <script>
 
-const test = [ [ "fqqsdfqfdsqfsdfqs", "ffffdddffffffffff", "fqsfffdfqsd", "1" ], [ "qsmdkfqsd", "qsdlfqenfpqse", "qsdlfqsfqs", "2" ], [ "KSA Wachtebeke", "BE-123456", "Koekjes eten in lab9k", "2" ], [ "qffq", "fdqsfsqs", "dfqsfqs", "3" ], [ "bert", "123", "test", "2" ], [ "qfdsqfsdfqs", "ffffffffffffff", "fqsdfqsd", "3" ] ]
-
-
 export default {
   name: 'app',
   data () {
@@ -50,7 +47,7 @@ export default {
       return results;
     },
     search: function() {
-      console.log(this.searchVereniging(document.getElementById("inputveld").value, test))
+      console.log(this.searchVereniging(document.getElementById("inputveld").value, verenigingList))
     }
   }
 
