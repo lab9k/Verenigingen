@@ -8,7 +8,9 @@
     <button v-on:click="search">
       zoek:
     </button>
-    <button v-on:click="fetchVereniging"/>
+    <button v-on:click="fetchVereniging" >
+      Maar dan kunt ge er iets inzetten
+    </button>
     <div class="add-vereniging-form">
       <label for="new-vereniging-naam">
         Naam:
@@ -97,7 +99,7 @@ export default {
     },
     fetchVereniging: () => {
       verenigingList.splice(0,verenigingList.length)
-      contract.getNumVerenigingen(function(err, res){
+      contract.numVerenigingen.call(function(err, res){
         for (var i = 0; i < res.c[0]; i++) {
           contract.getVereniging(i, (err, res) => {
             verenigingList.push(res);
@@ -105,16 +107,11 @@ export default {
         }
 
       });
-    }
-  },
-  methods: {
+    },
     searchVereniging: function(keyword, list) {
         var results = []
         var rx = new RegExp('.*' + keyword + '.*');
         for (var woord of list){
-          console.log(woord);
-          console.log(rx);
-          console.log(rx.test(woord[0]));
           if (rx.test(woord[0])){
             results.push(woord)
           }
