@@ -16,18 +16,18 @@
       <li><a href="https://github.com/vuejs/vueify" target="_blank">vueify</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
-    <form action="">
-      <div class="search-entity">
-        <input type="text" placeholder="Search for a member" v-model="searchVereniging"/>
-        <div class="input-icon">
-          <i class="fa fa-search"></i>
-        </div>
-      </div>
-    </form>
+    <input type="text" id="inputveld"/>
+    <button v-on:click="search">
+      zoek:
+    </button>
   </div>
 </template>
 
 <script>
+
+const test = [ [ "fqqsdfqfdsqfsdfqs", "ffffdddffffffffff", "fqsfffdfqsd", "1" ], [ "qsmdkfqsd", "qsdlfqenfpqse", "qsdlfqsfqs", "2" ], [ "KSA Wachtebeke", "BE-123456", "Koekjes eten in lab9k", "2" ], [ "qffq", "fdqsfsqs", "dfqsfqs", "3" ], [ "bert", "123", "test", "2" ], [ "qfdsqfsdfqs", "ffffffffffffff", "fqsdfqsd", "3" ] ]
+
+
 export default {
   name: 'app',
   data () {
@@ -36,18 +36,24 @@ export default {
     }
   },
   methods: {
-    searchVereniging: function(keyword) {
-        if (!search) {
-          return;
-        }
-        var rx = new RegExp('"([^"]*'+search+'[^"]*)"','gi');
-        while (result = rx.exec(string)) {
-          results += "\n" + result[1];
+    searchVereniging: function(keyword, list) {
+        var results = []
+        var rx = new RegExp('.*' + keyword + '.*');
+        for (var woord of list){
+          console.log(woord);
+          console.log(rx);
+          console.log(rx.test(woord[0]));
+          if (rx.test(woord[0])){
+            results.push(woord)
+          }
         }
       return results;
-    },      
+    },
+    search: function() {
+      console.log(this.searchVereniging(document.getElementById("inputveld").value, test))
     }
   }
+
 }
 </script>
 
