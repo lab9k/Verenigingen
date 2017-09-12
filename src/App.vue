@@ -89,27 +89,27 @@ if (typeof web3 !== "undefined") {
 const contract = web3.eth.contract(config.dappInterface).at(config.contractAddress);
 const verenigingList = []
 
-let addVerenigingEvent = clientReceipt.addVerenigingEvent(function(error, result) {
+let addVerenigingEvent = contract.addVerenigingEvent(function(error, result) {
     if (!error)
         console.log(result);
 });
 
-let editVerenigingEvent = clientReceipt.editVerenigingEvent(function(error, result) {
+let editVerenigingEvent = contract.editVerenigingEvent(function(error, result) {
     if (!error)
         console.log(result);
 });
 
-let statuschangedEvent = clientReceipt.statuschangedEvent(function(error, result) {
+let statuschangedEvent = contract.statuschangedEvent(function(error, result) {
     if (!error)
         console.log(result);
 });
 
-let addAdminEvent = clientReceipt.addAdminEvent(function(error, result) {
+let addAdminEvent = contract.addAdminEvent(function(error, result) {
     if (!error)
         console.log(result);
 });
 
-let removeAdminEvent = clientReceipt.removeAdminEvent(function(error, result) {
+let removeAdminEvent = contract.removeAdminEvent(function(error, result) {
     if (!error)
         console.log(result);
 });
