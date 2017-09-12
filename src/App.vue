@@ -47,7 +47,7 @@
       </label>
       <button id="addVerenigingBtn" v-on:click="addVereniging">Voeg Toe!</button>
     </div>
-     <div class="edit-vereniging-form">
+    <div class="edit-vereniging-form">
       <label for="edit-vereniging-naam">
         Naam:
         <input type="text" id="edit-vereniging-naam">
