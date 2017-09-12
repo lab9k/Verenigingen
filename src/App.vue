@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img src="http://vuejs.org/images/logo.png">
-    <h1>\{{ verenigingList }}</h1>
+    <h1>/{{ lijst }}</h1>
     <h2>Essential Links</h2>
     <ul>
       <li>
@@ -65,13 +65,13 @@ if (typeof web3 !== "undefined") {
   // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
 }
 const contract = web3.eth.contract(config.dappInterface).at(config.contractAddress);
-
+const verenigingList = []
 export default {
   name: 'app',
   data() {
     return {
       msg: 'Welcome to Your Vue.js App',
-      verenigingList: []
+      lijst: verenigingList
     }
   },
   methods: {
@@ -89,19 +89,14 @@ export default {
       });
     },
     fetchVereniging: () => {
-      var result = []
+      verenigingList.splice(0,verenigingList.length)
       contract.getNumVerenigingen(function(err, res){
         for (var i = 0; i < res.c[0]; i++) {
           contract.getVereniging(i, (err, res) => {
-            result.push(res);
+            verenigingList.push(res);
           })
         }
       });
-      setTimeout(function () {
-        console.log('hey');
-        this.verenigingList = result
-        console.log(this.verenigingList);
-      }, 1000);
     }
   }
 }
