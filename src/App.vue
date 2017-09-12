@@ -34,19 +34,34 @@
     </ul>
     <button v-on:click="fetchVereniging"/>
     <div class="add-vereniging-form">
-      <label for="vereniging-naam">
+      <label for="new-vereniging-naam">
         Naam:
-        <input type="text" id="vereniging-naam">
+        <input type="text" id="new-vereniging-naam">
       </label>
-      <label for="vereniging-beschrijving">
+      <label for="new-vereniging-beschrijving">
         beschrijving:
-        <input type="text" id="vereniging-beschrijving">
+        <input type="text" id="new-vereniging-beschrijving">
       </label>
-      <label for="vereniging-ondernemingsnummer">
+      <label for="new-vereniging-ondernemingsnummer">
         Ondernemingsnummer:
-        <input type="text" id="vereniging-ondernemingsnummer">
+        <input type="text" id="new-vereniging-ondernemingsnummer">
       </label>
       <button id="addVerenigingBtn" v-on:click="addVereniging">Voeg Toe!</button>
+    </div>
+    <div class="edit-vereniging-form">
+      <label for="edit-vereniging-naam">
+        Naam:
+        <input type="text" id="edit-vereniging-naam">
+      </label>
+      <label for="edit-vereniging-beschrijving">
+        beschrijving:
+        <input type="text" id="edit-vereniging-beschrijving">
+      </label>
+      <label for="edit-vereniging-ondernemingsnummer">
+        Ondernemingsnummer:
+        <input type="text" id="edit-vereniging-ondernemingsnummer">
+      </label>
+      <button id="editVerenigingBtn" v-on:click="addVereniging">Voeg Toe!</button>
     </div>
   </div>
 </template>
@@ -76,9 +91,9 @@ export default {
   },
   methods: {
     addVereniging: () => {
-      let naam = document.getElementById("vereniging-naam").value;
-      let beschrijving = document.getElementById("vereniging-beschrijving").value;
-      let ondernemingsnummer = document.getElementById("vereniging-ondernemingsnummer").value;
+      let naam = document.getElementById("new-vereniging-naam").value;
+      let beschrijving = document.getElementById("new-vereniging-beschrijving").value;
+      let ondernemingsnummer = document.getElementById("new-vereniging-ondernemingsnummer").value;
       console.log(naam, beschrijving, ondernemingsnummer);
       contract.addVereniging(naam, ondernemingsnummer, beschrijving, (error, value) => {
         if (error) {
@@ -86,6 +101,19 @@ export default {
         } else {
           console.log(value);
         }
+      });
+    },
+
+  editVereniging: () => {
+      let naam = document.getElementById("edit-vereniging-naam").value;
+      let beschrijving = document.getElementById("edit-vereniging-beschrijving").value;
+      let ondernemingsnummer = document.getElementById("edit-vereniging-ondernemingsnummer").value;
+      let id = document.getElementById("edit-vereniging-id").value;
+      contract.editVereniging(id, naam, ondernemingsnummer, beschrijving, (error, value) => {
+        if (error)
+          console.log("error: ", error);
+        else
+          console.log("value: ", value);
       });
     },
     fetchVereniging: () => {
@@ -96,6 +124,7 @@ export default {
             verenigingList.push(res);
           })
         }
+
       });
     }
   }
