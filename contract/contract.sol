@@ -5,8 +5,8 @@ contract Owned {
 
     mapping(address => bool) admins;
 
-    event addAdminEvent(address _newAdmin, uint now);
-    event removeAdminEvent(address _Admin, uint now);
+    event addAdminEvent(address _newAdmin, uint dateTime);
+    event removeAdminEvent(address _Admin, uint dateTime);
 
     function Owned() {
         admins[msg.sender] = true;
@@ -24,7 +24,7 @@ contract Owned {
 
     function removeAdmin(address _admin) isAdmin {
         admins[_admin] = false;
-        removeAdminEvent(_Admin, now);
+        removeAdminEvent(_admin, now);
     }
 
     function checkIfAdmin(address _addr) constant returns(bool admin) { 
@@ -49,7 +49,7 @@ contract VerenigingenContract is Owned {
 
     event addVerenigingEvent(uint id, string _naam, string _ondernemingsnummer, string _beschrijving, uint datetime);
     event editVerenigingEvent(uint id, string _naam, string _ondernemingsnummer, string _beschrijving, uint datetime);
-    event statuschangedEvent(uint id, uint tatus, uint datetime);
+    event statuschangedEvent(uint id, Status status, uint datetime);
 
 
     function VerenigingenContract() {
