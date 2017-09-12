@@ -1,37 +1,9 @@
 <template>
   <div id="app">
     <img src="http://vuejs.org/images/logo.png">
-    <h1>/{{ lijst }}</h1>
+    <h1>{{ lijst }}</h1>
     <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a href="https://vuejs.org" target="_blank">Core Docs</a>
-      </li>
-      <li>
-        <a href="https://forum.vuejs.org" target="_blank">Forum</a>
-      </li>
-      <li>
-        <a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/vuejs" target="_blank">Twitter</a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a href="http://router.vuejs.org/" target="_blank">vue-router</a>
-      </li>
-      <li>
-        <a href="http://vuex.vuejs.org/" target="_blank">vuex</a>
-      </li>
-      <li>
-        <a href="https://github.com/vuejs/vueify" target="_blank">vueify</a>
-      </li>
-      <li>
-        <a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a>
-      </li>
-    </ul>
+    
     <input type="text" id="inputveld"/>
     <button v-on:click="search">
       zoek:
@@ -71,9 +43,7 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 
-=======
 const config = {
   dappInterface:[{"constant":false,"inputs":[{"name":"_admin","type":"address"}],"name":"removeAdmin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"acceptRequest","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"id","type":"uint256"}],"name":"getVereniging","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newAdmin","type":"address"}],"name":"addAdmin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"denyRequest","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_naam","type":"string"},{"name":"_ondernemingsnummer","type":"string"},{"name":"_beschrijving","type":"string"}],"name":"addVereniging","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"numVerenigingen","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_addr","type":"address"}],"name":"checkIfAdmin","outputs":[{"name":"admin","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"},{"name":"_naam","type":"string"},{"name":"_ondernemingsnummer","type":"string"},{"name":"_beschrijving","type":"string"}],"name":"editVereniging","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"id","type":"uint256"},{"indexed":false,"name":"_naam","type":"string"},{"indexed":false,"name":"_ondernemingsnummer","type":"string"},{"indexed":false,"name":"_beschrijving","type":"string"},{"indexed":false,"name":"datetime","type":"uint256"}],"name":"addVerenigingEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"id","type":"uint256"},{"indexed":false,"name":"_naam","type":"string"},{"indexed":false,"name":"_ondernemingsnummer","type":"string"},{"indexed":false,"name":"_beschrijving","type":"string"},{"indexed":false,"name":"datetime","type":"uint256"}],"name":"editVerenigingEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"id","type":"uint256"},{"indexed":false,"name":"status","type":"uint8"},{"indexed":false,"name":"datetime","type":"uint256"}],"name":"statuschangedEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_newAdmin","type":"address"},{"indexed":false,"name":"dateTime","type":"uint256"}],"name":"addAdminEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_Admin","type":"address"},{"indexed":false,"name":"dateTime","type":"uint256"}],"name":"removeAdminEvent","type":"event"}]
 ,
