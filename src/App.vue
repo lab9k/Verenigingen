@@ -125,7 +125,7 @@ export default {
     search: function() {
       console.log(this.searchVereniging(document.getElementById("inputveld").value, verenigingList))
     },
-    acceptRequest: () => {
+    acceptRequest: function() {
       let id = document.getElementById("Vereniging-id").value;
       console.log("Accept", id);
       contract.acceptRequest(id, (error, value) => {
@@ -136,7 +136,7 @@ export default {
         }
       })
     },
-    denyRequest: () => {
+    denyRequest: function() {
       let id = document.getElementById("Vereniging-id").value;
       console.log("Deny", id);
       contract.denyRequest(id, (error, value) => {
