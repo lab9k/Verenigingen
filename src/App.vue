@@ -47,6 +47,12 @@
       </label>
       <button id="addVerenigingBtn" v-on:click="addVereniging">Voeg Toe!</button>
     </div>
+    <div class="accept-deny">
+      <label for="Vereniging-id">Id:</label>
+      <input type="text" id="Vereniging-id" placeholder="10"></input>
+      <button id="acceptRequestBTN" v-on:click="acceptRequest">Accept!</button>
+      <button id="denyRequestBTN" v-on:click="denyRequest">Deny!</button>
+    </div>
   </div>
 </template>
 
@@ -85,7 +91,29 @@ export default {
           console.log(value);
         }
       });
-    }
+    },
+      acceptRequest: () => {
+          let id = document.getElementById("Vereniging-id").value;
+          console.log("Accept", id);
+          contract.acceptRequest(id, (error, value) => {
+              if (error) {
+                  console.log(error);
+              } else {
+                  console.log(value);
+              }
+          })
+      },
+      denyRequest: () => {
+          let id = document.getElementById("Vereniging-id").value;
+          console.log("Deny", id);
+          contract.denyRequest(id, (error, value) => {
+              if (error) {
+                  console.log(error);
+              } else {
+                  console.log(value);
+              }
+          })
+      }
   }
 }
 </script>
