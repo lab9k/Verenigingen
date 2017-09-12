@@ -65,6 +65,31 @@ if (typeof web3 !== "undefined") {
 }
 const contract = web3.eth.contract(config.dappInterface).at(config.contractAddress);
 
+let addVerenigingEvent = contract.addVerenigingEvent(function (error, result) {
+    if (!error)
+        console.log(result);
+});
+
+let editVerenigingEvent = contract.editVerenigingEvent(function (error, result) {
+    if (!error)
+        console.log(result);
+});
+
+let statuschangedEvent = contract.statuschangedEvent(function (error, result) {
+    if (!error)
+        console.log(result);
+});
+
+let addAdminEvent = contract.addAdminEvent(function (error, result) {
+    if (!error)
+        console.log(result);
+});
+
+let removeAdminEvent = contract.removeAdminEvent(function (error, result) {
+    if (!error)
+        console.log(result);
+});
+
 export default {
   name: 'app',
   data() {
