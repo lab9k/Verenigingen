@@ -32,6 +32,10 @@
         <a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a>
       </li>
     </ul>
+    <input type="text" id="inputveld"/>
+    <button v-on:click="search">
+      zoek:
+    </button>
     <button v-on:click="fetchVereniging"/>
     <div class="add-vereniging-form">
       <label for="new-vereniging-naam">
@@ -67,6 +71,9 @@
 </template>
 
 <script>
+<<<<<<< HEAD
+
+=======
 const config = {
   dappInterface:[{"constant":false,"inputs":[{"name":"_admin","type":"address"}],"name":"removeAdmin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"acceptRequest","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"id","type":"uint256"}],"name":"getVereniging","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newAdmin","type":"address"}],"name":"addAdmin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"denyRequest","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_naam","type":"string"},{"name":"_ondernemingsnummer","type":"string"},{"name":"_beschrijving","type":"string"}],"name":"addVereniging","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"numVerenigingen","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getNumVerenigingen","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_addr","type":"address"}],"name":"checkIfAdmin","outputs":[{"name":"admin","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"},{"name":"_naam","type":"string"},{"name":"_ondernemingsnummer","type":"string"},{"name":"_beschrijving","type":"string"}],"name":"editVereniging","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}],
 
@@ -81,6 +88,7 @@ if (typeof web3 !== "undefined") {
 }
 const contract = web3.eth.contract(config.dappInterface).at(config.contractAddress);
 const verenigingList = []
+>>>>>>> develop
 export default {
   name: 'app',
   data() {
@@ -127,7 +135,26 @@ export default {
 
       });
     }
+  },
+  methods: {
+    searchVereniging: function(keyword, list) {
+        var results = []
+        var rx = new RegExp('.*' + keyword + '.*');
+        for (var woord of list){
+          console.log(woord);
+          console.log(rx);
+          console.log(rx.test(woord[0]));
+          if (rx.test(woord[0])){
+            results.push(woord)
+          }
+        }
+      return results;
+    },
+    search: function() {
+      console.log(this.searchVereniging(document.getElementById("inputveld").value, verenigingList))
+    }
   }
+
 }
 </script>
 
