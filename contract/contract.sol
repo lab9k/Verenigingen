@@ -22,7 +22,7 @@ contract Owned {
         admins[_admin] = false;
     }
 
-    function checkIfAdmin(address _addr) constant returns(bool admin) { 
+    function checkIfAdmin(address _addr) constant returns(bool admin) {
         admin = admins[_addr];
     }
 
@@ -43,8 +43,12 @@ contract VerenigingenContract is Owned {
     mapping(uint => Vereniging) verenigingen;
 
     function VerenigingenContract() {
-        
+
     }
+
+    function getNumVerenigingen() constant returns(uint){
+     return numVerenigingen;
+   }
 
     function acceptRequest(uint id) isAdmin {
         if (verenigingen[id].status != Status.PENDING) {
@@ -66,15 +70,15 @@ contract VerenigingenContract is Owned {
             ondernemingsnummer:_ondernemingsnummer,
             beschrijving:_beschrijving,
             status:Status.PENDING
-        });   
-        numVerenigingen++;              
+        });
+        numVerenigingen++;
     }
 
     function editVereniging(
         uint id,
         string _naam,
         string _ondernemingsnummer,
-        string _beschrijving) isAdmin 
+        string _beschrijving) isAdmin
         {
         verenigingen[id].naam = _naam;
         verenigingen[id].ondernemingsnummer = _ondernemingsnummer;
