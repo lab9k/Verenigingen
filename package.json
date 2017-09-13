@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/lab9k/Verenigingen#readme",
   "dependencies": {
-    "vue": "^2.4.2"
+    "vue": "^2.4.2",
+    "vue-router": "^2.7.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -32,6 +33,7 @@
     "envify": "^4.1.0",
     "gulp": "^3.9.1",
     "gulp-sass": "^3.1.0",
+    "eslint": "^4.6.1",
     "http-server": "^0.10.0",
     "node-sass": "^4.5.3",
     "npm-run-all": "^4.1.1",
