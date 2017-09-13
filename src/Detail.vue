@@ -1,16 +1,17 @@
 <template>
     <div id="detail">
-        Hello Detail!
+        {{ msg }}
     </div>
 </template>
+
 <script>
-export default {
-  name: 'detail',
-    data() {
-        return {
-            msg: 'Welcome to Your Vue.js App',
-            lijst: verenigingList
-        }
-    },
-}
+    export default {
+    name: 'detail',
+        data() {
+            return {
+                msg: 'Detailpage',
+                lijst: verenigingList
+            }
+        },
+    }
 </script>
