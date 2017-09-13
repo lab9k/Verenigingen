@@ -76,7 +76,7 @@ export default {
     }
   },
   mounted: function(){
-    this.fetchVereniging().then(this.test)
+    this.fetchVereniging()
   },
   methods: {
     test: function () {
@@ -108,21 +108,14 @@ export default {
       });
     },
     fetchVereniging: () => {
-      return new Promise((resolve, reject) => {
         verenigingList.length = 0
         contract.numVerenigingen.call(function(err, res){
-          if(err){
-            reject(err)
-          } else {
-            for (var i = 0; i < res.c[0]; i++) {
-              contract.getVereniging(i, (err, res) => {
-                verenigingList[res[4]] = res;
-              })
-            }
-            resolve()
+          for (var i = 0; i < res.c[0]; i++) {
+            contract.getVereniging(i, (err, res) => {
+              verenigingList[res[4]] = {'naam': res[0], 'ondernemingsnummer': res[1], 'beschrijving': res[2], 'status': res[3]};
+            })
           }
-        });
-      });
+        })
     },
     searchVereniging: function(keyword, list) {
         var results = []
