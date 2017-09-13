@@ -33,6 +33,10 @@ contract VerenigingenContract is Owned {
 
     enum Status {NULL, ACCEPTED, PENDING, DENIED }
 
+    event addVerenigingEvent(uint id, string _naam, string _ondernemingsnummer, string _beschrijving, uint datetime);
+    event editVerenigingEvent(uint id, string _naam, string _ondernemingsnummer, string _beschrijving, uint datetime);
+    event statuschangedEvent(uint id, Status status, uint datetime);
+
     struct Vereniging {
         string naam;
         string ondernemingsnummer;
@@ -51,6 +55,7 @@ contract VerenigingenContract is Owned {
             revert();
         }
         verenigingen[id].status = Status.ACCEPTED;
+        statuschangedEvent(id, Status.ACCEPTED, now);
     }
 
     function denyRequest(uint id) isAdmin {
@@ -58,6 +63,7 @@ contract VerenigingenContract is Owned {
             revert();
         }
         verenigingen[id].status = Status.DENIED;
+        statuschangedEvent(id, Status.DENIED, now);
     }
 
     function addVereniging(string _naam, string _ondernemingsnummer, string _beschrijving) isAdmin {
@@ -67,6 +73,7 @@ contract VerenigingenContract is Owned {
             beschrijving:_beschrijving,
             status:Status.PENDING
         });
+        addVerenigingEvent(numVerenigingen, _naam, _ondernemingsnummer, _beschrijving, now);
         numVerenigingen++;
     }
 
@@ -86,6 +93,7 @@ contract VerenigingenContract is Owned {
           verenigingen[id].beschrijving = _beschrijving;
         }
         verenigingen[id].status = Status.PENDING;
+        editVerenigingEvent(id, _naam, _ondernemingsnummer, _beschrijving, now);
     }
 
     function getVereniging(uint id) constant returns(string, string, string, Status) {
