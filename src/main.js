@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Home from './Home.vue'
+import Lijst from './Lijst.vue'
+import Nieuw from './Nieuw.vue'
+import Contact from './Contact.vue'
 import Detail from './Detail.vue'
 import VueRouter from 'vue-router'
 
@@ -9,7 +12,10 @@ Vue.use(VueRouter);
 
 const routes = [
   { path: '/', component: Home },
-  { path: '/detail', component: Detail }
+  { path: '/lijst', component: Lijst },
+  { path: '/nieuw', component: Nieuw },
+  { path: '/contact', component: Contact },
+  { path: '/detail', component: Detail },
 ]
 
 // 3. Create the router instance and pass the `routes` option
