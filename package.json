@@ -31,6 +31,8 @@
     "browserify-hmr": "^0.3.5",
     "cross-env": "^5.0.5",
     "envify": "^4.1.0",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0",
     "eslint": "^4.6.1",
     "http-server": "^0.10.0",
     "node-sass": "^4.5.3",
@@ -48,5 +50,6 @@
   },
   "browser": {
     "vue": "vue/dist/vue.common.js"
-  }
+  },
+  "keywords": []
 }
