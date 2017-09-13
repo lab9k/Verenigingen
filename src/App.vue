@@ -43,7 +43,7 @@
     </div>
     <div class="accept-deny">
       <label for="Vereniging-id">Id:</label>
-      <input type="text" id="Vereniging-id" placeholder="10"></input>
+      <input type="text" id="Vereniging-id" placeholder="0"></input>
       <button id="acceptRequestBTN" v-on:click="acceptRequest">Accept!</button>
       <button id="denyRequestBTN" v-on:click="denyRequest">Deny!</button>
     </div>
