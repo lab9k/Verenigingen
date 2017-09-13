@@ -1,52 +1,61 @@
 <template>
     <div id="app">
-        <img src="http://vuejs.org/images/logo.png">
-        <h1>{{ lijst }}</h1>
-        <h2>Essential Links</h2>
+        <img src="assets/img/triangle-blue.svg" alt="" class="triangle-blue">
+            
+        <div class="zoeken">
+            <!-- <pre>{{ lijst }}</pre> -->
+            <form action="" class="zoek-vereniging">
+                <h2>Zoek naar uw vereniging</h2>
 
-        <input type="text" id="inputveld" />
-        <button v-on:click="search">
-            zoek:
-        </button>
-        <button v-on:click="fetchVereniging">
-            Maar dan kunt ge er iets inzetten
-        </button>
-        <div class="add-vereniging-form">
-            <label for="new-vereniging-naam">
-                Naam:
-                <input type="text" id="new-vereniging-naam">
-            </label>
-            <label for="new-vereniging-beschrijving">
-                beschrijving:
-                <input type="text" id="new-vereniging-beschrijving">
-            </label>
-            <label for="new-vereniging-ondernemingsnummer">
-                Ondernemingsnummer:
-                <input type="text" id="new-vereniging-ondernemingsnummer">
-            </label>
+                <input type="text" id="inputveld"/>
+
+                <button v-on:click="search">
+                    zoeken
+                </button>
+                
+                <!-- <button v-on:click="fetchVereniging" >
+                    Maar dan kunt ge er iets inzetten
+                </button> -->
+            </form>
+            <img src="assets/img/triangle-white.svg" alt="" class="triangle-white">
+        </div>
+
+        <form action="" class="add-vereniging-form">
+            <label for="new-vereniging-naam">Naam</label>
+            <input type="text" id="new-vereniging-naam">
+
+            <label for="new-vereniging-beschrijving">Beschrijving</label>				
+            <input type="text" id="new-vereniging-beschrijving">
+
+            <label for="new-vereniging-ondernemingsnummer">Ondernemingsnummer</label>				
+            <input type="text" id="new-vereniging-ondernemingsnummer">
+
             <button id="addVerenigingBtn" v-on:click="addVereniging">Voeg Toe!</button>
-        </div>
-        <div class="edit-vereniging-form">
-            <label for="edit-vereniging-naam">
-                Naam:
-                <input type="text" id="edit-vereniging-naam">
-            </label>
-            <label for="edit-vereniging-beschrijving">
-                beschrijving:
-                <input type="text" id="edit-vereniging-beschrijving">
-            </label>
-            <label for="edit-vereniging-ondernemingsnummer">
-                Ondernemingsnummer:
-                <input type="text" id="edit-vereniging-ondernemingsnummer">
-            </label>
-            <button id="editVerenigingBtn" v-on:click="addVereniging">Voeg Toe!</button>
-        </div>
-        <div class="accept-deny">
+        </form>
+
+        <hr>
+
+        <!-- <form class="edit-vereniging-form">
+            <label for="edit-vereniging-naam">Naam</label>
+            <input type="text" id="edit-vereniging-naam">
+
+            <label for="edit-vereniging-beschrijving">Beschrijving</label>
+            <input type="text" id="edit-vereniging-beschrijving">
+
+            <label for="edit-vereniging-ondernemingsnummer">Ondernemingsnummer</label>
+            <input type="text" id="edit-vereniging-ondernemingsnummer">
+
+            <button id="editVerenigingBtn" v-on:click="addVereniging">Edit</button>
+        </form> 
+
+        <hr>-->
+
+        <form class="accept-deny-form">
             <label for="Vereniging-id">Id:</label>
             <input type="text" id="Vereniging-id" placeholder="0"></input>
             <button id="acceptRequestBTN" v-on:click="acceptRequest">Accept!</button>
             <button id="denyRequestBTN" v-on:click="denyRequest">Deny!</button>
-        </div>
+        </form>
     </div>
 </template>
 
