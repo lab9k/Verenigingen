@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <img src="http://vuejs.org/images/logo.png">
-    <h1>{{ lijst }}</h1>
-    <h2>Essential Links</h2>
+    <h1 id="header"></h1>
+    <h2> {{ verenigingList }}</h2>
 
     <input type="text" id="inputveld"/>
     <button v-on:click="search">
@@ -65,22 +65,39 @@ if (typeof web3 !== "undefined") {
   // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
 }
 const contract = web3.eth.contract(config.dappInterface).at(config.contractAddress);
-const verenigingList = {}
 
 export default {
   name: 'app',
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App',
-      lijst: Object.values(verenigingList)
+      verenigingList : {},
     }
   },
   mounted: function(){
-    this.fetchVereniging()
+    var self = this
+    this.fetchVerenigingenLijst();
+    var event = contract.statuschangedEvent(function(error, result) {
+      if (!error){
+        self.verenigingList[result.args.id].status = result.args.status
+        self.test()
+      }
+    });
+    var event = contract.editVerenigingEvent(function(error, result) {
+      if (!error){
+        self.verenigingList[result.args.id] = {'naam': result.args._naam, 'ondernemingsnummer': result.args._ondernemingsnummer, 'beschrijving': result.args._beschrijving, 'status': 2};
+        self.test()
+      }
+    });
+    var event = contract.addVerenigingEvent(function(error, result) {
+      if (!error){
+        self.verenigingList[result.args.id] = {'naam': result.args._naam, 'ondernemingsnummer': result.args._ondernemingsnummer, 'beschrijving': result.args._beschrijving, 'status': 2};
+        self.test()
+      }
+    });
   },
   methods: {
-    test: function () {
-      this.lijst = Object.values(verenigingList)
+    test: function() {
+      document.getElementById('header').innerHTML = JSON.stringify(this.verenigingList)
     },
     addVereniging: () => {
       let naam = document.getElementById("new-vereniging-naam").value;
@@ -88,11 +105,8 @@ export default {
       let ondernemingsnummer = document.getElementById("new-vereniging-ondernemingsnummer").value;
       console.log(naam, beschrijving, ondernemingsnummer);
       contract.addVereniging(naam, ondernemingsnummer, beschrijving, (error, value) => {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log(value);
-        }
+        if (error)
+          alert(error);
       });
     },
   editVereniging: () => {
@@ -102,20 +116,29 @@ export default {
       let id = document.getElementById("edit-vereniging-id").value;
       contract.editVereniging(id, naam, ondernemingsnummer, beschrijving, (error, value) => {
         if (error)
-          console.log("error: ", error);
-        else
-          console.log("value: ", value);
+          alert("error: ", error);
       });
     },
-    fetchVereniging: () => {
-        verenigingList.length = 0
-        contract.numVerenigingen.call(function(err, res){
-          for (var i = 0; i < res.c[0]; i++) {
-            contract.getVereniging(i, (err, res) => {
-              verenigingList[res[4]] = {'naam': res[0], 'ondernemingsnummer': res[1], 'beschrijving': res[2], 'status': res[3]};
-            })
-          }
+    fetchVerenigingenLijst: function(){
+      this.getNumVereniging().then( (num) => this.fetchVereniging(num)).then( (result) => {this.verenigingList = result});
+    },
+    getNumVereniging: function() {
+      return new Promise((resolve, reject) => contract.numVerenigingen.call(function(error, result) {
+        if(error){
+          reject()
+        } else {
+          resolve(result)
+        }
+      }))
+    },
+    fetchVereniging: async function(index) {
+      var dict = {}
+      for (var i = 0; i < index; i++) {
+        contract.getVereniging(i, function(err, res){
+          dict[res[4]] = {'naam': res[0], 'ondernemingsnummer': res[1], 'beschrijving': res[2], 'status': res[3]};
         })
+      }
+      return dict;
     },
     searchVereniging: function(keyword, list) {
         var results = []
