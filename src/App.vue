@@ -8,7 +8,7 @@
     <button v-on:click="search">
       zoek:
     </button>
-    <button v-on:click="fetchVereniging" >
+    <button v-on:click="test" >
       Maar dan kunt ge er iets inzetten
     </button>
     <div class="add-vereniging-form">
@@ -65,20 +65,23 @@ if (typeof web3 !== "undefined") {
   // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
 }
 const contract = web3.eth.contract(config.dappInterface).at(config.contractAddress);
-const verenigingList = []
+const verenigingList = {}
 
 export default {
   name: 'app',
   data() {
     return {
       msg: 'Welcome to Your Vue.js App',
-      lijst: verenigingList
+      lijst: Object.values(verenigingList)
     }
   },
   mounted: function(){
-    this.fetchVereniging()
+    this.fetchVereniging().then(this.test)
   },
   methods: {
+    test: function () {
+      this.lijst = Object.values(verenigingList)
+    },
     addVereniging: () => {
       let naam = document.getElementById("new-vereniging-naam").value;
       let beschrijving = document.getElementById("new-vereniging-beschrijving").value;
@@ -105,14 +108,20 @@ export default {
       });
     },
     fetchVereniging: () => {
-      verenigingList.splice(0,verenigingList.length)
-      contract.numVerenigingen.call(function(err, res){
-        for (var i = 0; i < res.c[0]; i++) {
-          contract.getVereniging(i, (err, res) => {
-            verenigingList.push(res);
-          })
-        }
-
+      return new Promise((resolve, reject) => {
+        verenigingList.length = 0
+        contract.numVerenigingen.call(function(err, res){
+          if(err){
+            reject(err)
+          } else {
+            for (var i = 0; i < res.c[0]; i++) {
+              contract.getVereniging(i, (err, res) => {
+                verenigingList[res[4]] = res;
+              })
+            }
+            resolve()
+          }
+        });
       });
     },
     searchVereniging: function(keyword, list) {
