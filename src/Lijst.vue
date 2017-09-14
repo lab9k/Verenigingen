@@ -9,45 +9,34 @@
                       Alle verenigingen
                     </button>
                 </div>
-                <div class="wrapper">
-                  <div class="lijst_item"
-                      v-bind:class="{ open: isActiveListItem }"
-                      v-on:click="isActiveListItem = !isActiveListItem"
-                      v-for="item in lijst" :key='item.id'>
-                      <div class="name">
-                          <label>Naam: </label>
-                          {{ item.naam }}
-                      </div>
-                      <div class="list-wrapper">
-                        <div class="list_item"
-                        v-bind:class="{ open: isActiveListItem }"
-                        v-on:click="isActiveListItem = !isActiveListItem"
-                        v-for="(item, index) in lijst"
-                        :key="index">
-                        <div class="border-left"></div>
-                        <div class="name">
-                            <strong>{{ item.naam }}</strong>
-                        </div>
-                        <div class="ondernemingsnummer">
-                            Ondernemingsnummer:
-                            {{ item.ondernemingsnummer }}
-                        </div>
-                        <div class="description">
-                            {{ item.beschrijving }}
-                        </div>
-                        <div class="status">
-                            <div>{{ item.status }}</div>
-                            <img v-bind:src="'assets/' + item.status + '.svg'" alt="Accepted" title="Status">
-                        </div>
+                <div class="list-wrapper">
+                  <div class="list_item"
+                      v-bind:class="{ open: (activeListItem == item.id) }"
+                      v-on:click="toggleCollapse(item.id)"
+                      v-for="item in lijst" :key='parseInt(item.id)'>
+                            <div class="border-left"></div>
+                            <div class="name">
+                                <strong>{{ item.naam }}</strong>
+                            </div>
+                            <div class="ondernemingsnummer">
+                                Ondernemingsnummer:
+                                {{ item.ondernemingsnummer }}
+                            </div>
+                            <div class="description">
+                                {{ item.beschrijving }}
+                            </div>
+                            <div class="status">
+                                <img v-bind:src="'assets/' + item.status + '.svg'" alt="Accepted" title="Status">
+                            </div>
+                            <button v-on:click='$root.acceptRequest(item.id)' >
+                              goedkeuren
+                            </button>
+                            <button v-on:click='$root.denyRequest(item.id)' >
+                              afkeuren
+                            </button>
                     </div>
                 </div>
             </div>
-                <button v-on:click='$root.acceptRequest(item.id)' >
-                  goedkeuren
-                </button>
-                <button v-on:click='$root.denyRequest(item.id)' >
-                  afkeuren
-                </button>
         </div>
         <footer>
             <p>&copy Copyright - Lab9K</p>
@@ -66,7 +55,7 @@
         data() {
             return {
                 title: 'Lijst',
-                isActiveListItem: false,
+                activeListItem: false,
                 lijst: []
             }
         },
@@ -74,6 +63,13 @@
           this.lijst = Object.values(this.$root.verenigingList)
         },
         methods: {
+          toggleCollapse: function(id){
+            if(this.activeListItem == id){
+              this.activeListItem = -1
+            } else {
+              this.activeListItem = id
+            }
+          },
           toonAlle: function(){
             this.lijst = Object.values(this.$root.verenigingList)
           },
@@ -83,7 +79,6 @@
           },
           updateLijst: function() {
             this.lijst = Object.values(this.$root.verenigingList).filter( (post) =>  {
-              console.log(this);
               return post.naam.toLowerCase().includes(this.search.toLowerCase())
             })
           },

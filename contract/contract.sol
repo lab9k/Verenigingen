@@ -83,20 +83,20 @@ contract VerenigingenContract is Owned {
         string _ondernemingsnummer,
         string _beschrijving) isAdmin
         {
-        if(_naam.length != 0 && _naam != verenigingen[id].naam){
+        if(bytes(_naam).length != 0) {
           verenigingen[id].naam = _naam;
         }
-        if(_ondernemingsnummer.length != 0 && _ondernemingsnummer != verenigingen[id].ondernemingsnummer){
+        if(bytes(_ondernemingsnummer).length != 0){
           verenigingen[id].ondernemingsnummer = _ondernemingsnummer;
         }
-        if(_beschrijving.length != 0 && _beschrijving != verenigingen[id].beschrijving){
+        if(bytes(_beschrijving).length != 0){
           verenigingen[id].beschrijving = _beschrijving;
         }
         verenigingen[id].status = Status.PENDING;
         editVerenigingEvent(id, _naam, _ondernemingsnummer, _beschrijving, now);
     }
 
-    function getVereniging(uint id) constant returns(string, string, string, Status) {
-        return (verenigingen[id].naam,verenigingen[id].ondernemingsnummer,verenigingen[id].beschrijving,verenigingen[id].status);
+    function getVereniging(uint id) constant returns(string, string, string, Status, uint) {
+        return (verenigingen[id].naam,verenigingen[id].ondernemingsnummer,verenigingen[id].beschrijving,verenigingen[id].status, id);
     }
 }
