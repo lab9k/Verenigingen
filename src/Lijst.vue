@@ -12,11 +12,11 @@
                     <label>Naam: </label>
                     {{ item[0] }}
                 </div>
-                <div class="description">
-                    {{ item[1] }}
-                </div>
                 <div class="ondernemingsnummer">
                     Ondernemingsnummer: 
+                    {{ item[1] }}
+                </div>
+                <div class="description">
                     {{ item[2] }}
                 </div>
                 <div class="status">
