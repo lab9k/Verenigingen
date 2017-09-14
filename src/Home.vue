@@ -1,48 +1,40 @@
 <template>
     <div id="app">
-        <img src="assets/img/triangle-blue.svg" alt="" class="triangle-blue">
+        <section id="eyecatcher">
+            <div class="info">
+                <img src="assets/logo-verenigingen.svg" alt="" class="logo">
 
-        <div class="zoeken">
+                <a href="/#/lijst" class="btn btn-lijst">Lijst met verenigingen</a>
+            </div>
 
-            <img src="assets/img/triangle-white.svg" alt="" class="triangle-white">
+            <div class="scroll">
+                <a>Wat is dit?</a>
+                <img src="assets/line.svg" alt="">
+            </div>
+
+            <img class="triangle" src="assets/triangle-white.svg" alt="etecatcher">
+        </section>
+
+        <div id="what">
+            <div class="content">
+                <h1>Wat?</h1>
+                <p>
+                    Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur aliquet quam id dui posuere blandit. Nulla quis lorem ut libero malesuada feugiat. Sed porttitor lectus nibh. Nulla porttitor accumsan tincidunt.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                </p>
+            </div>
         </div>
 
-        <!-- <form action="" class="add-vereniging-form">
-            <label for="new-vereniging-naam">Naam</label>
-            <input type="text" id="new-vereniging-naam">
-
-            <label for="new-vereniging-beschrijving">Beschrijving</label>
-            <input type="text" id="new-vereniging-beschrijving">
-
-            <label for="new-vereniging-ondernemingsnummer">Ondernemingsnummer</label>
-            <input type="text" id="new-vereniging-ondernemingsnummer">
-
-            <button id="addVerenigingBtn" v-on:click="addVereniging">Voeg Toe!</button>
-        </form>
-
-        <hr>
-
-        <form class="edit-vereniging-form">
-            <label for="edit-vereniging-naam">Naam</label>
-            <input type="text" id="edit-vereniging-naam">
-
-            <label for="edit-vereniging-beschrijving">Beschrijving</label>
-            <input type="text" id="edit-vereniging-beschrijving">
-
-            <label for="edit-vereniging-ondernemingsnummer">Ondernemingsnummer</label>
-            <input type="text" id="edit-vereniging-ondernemingsnummer">
-
-            <button id="editVerenigingBtn" v-on:click="addVereniging">Edit</button>
-        </form>
-
-        <hr>
-
-        <form class="accept-deny-form">
-            <label for="Vereniging-id">Id:</label>
-            <input type="text" id="Vereniging-id" placeholder="0"></input>
-            <button id="acceptRequestBTN" v-on:click="acceptRequest">Accept!</button>
-            <button id="denyRequestBTN" v-on:click="denyRequest">Deny!</button>
-        </form> -->
+        <footer>
+            <p>&copy Copyright - Lab9K</p>
+            <p><a href="">GitHub</a></p>
+            <div class="partners">
+                <a href="https://lab9k.github.io/" target="_blank"><img src="assets/partners/partner-lab9k.svg" alt=""></a>
+                <a href="https://stad.gent" target="_blank"><img src="assets/partners/partner-stadgent.svg" alt=""></a>
+            </div>
+        </footer>
     </div>
 </template>
 
@@ -51,3 +43,4 @@
         name: 'app'
     }
 </script>
+
