@@ -1,12 +1,11 @@
 $height-footer: 150px;
 
-section{
+section {
     position: relative;
     width: 100vw;
     height: 100vh;
     &#eyecatcher {
         background-image: url('../assets/bg2.jpg');
-        background-position: center left;
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
@@ -14,14 +13,10 @@ section{
         height: calc(100vh - 5px);
         .info {
             position: absolute;
-            top: 5vh;
-            left: calc(50% - 125px);
+            left: calc(50% - 140px);
 
             display: flex;
             flex-direction: column;
-            img.logo {
-                margin-bottom: 100px;
-            }
             a.btn.btn-lijst {
                 font-size: 1.5em;
                 font-weight: bold;
@@ -30,7 +25,7 @@ section{
         .scroll {
             position: absolute;
             bottom: 0;
-            left: calc(50% - 1px);
+            left: calc(50% - 36px);
 
             display: flex;
             flex-direction: column;
@@ -44,5 +39,34 @@ section{
         }
     }
     &#what {
+    }
+}
+
+@media screen and (min-width: 320px) {
+    section {
+        &#eyecatcher {
+            background-position: -200px;
+            img.logo {
+                height: 150px;                
+                margin-bottom: 50px;
+            }
+            .info {
+                top: 22vh;
+            }
+        }
+    }
+}
+@media screen and (min-width: 960px) {
+    section {
+        &#eyecatcher {
+            background-position: center left;
+            img.logo {
+                height: 300px;                
+                margin-bottom: 100px;
+            }
+            .info {
+                top: 10vh;
+            }
+        }
     }
 }

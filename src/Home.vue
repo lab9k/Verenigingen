@@ -2,13 +2,13 @@
     <div id="app">
         <section id="eyecatcher">
             <div class="info">
-                <img src="assets/logo-verenigingen.svg" alt="" class="logo" height="300px;">
+                <img src="assets/logo-verenigingen.svg" alt="" class="logo">
 
                 <a href="/#/lijst" class="btn btn-lijst">Lijst met verenigingen</a>
             </div>
 
             <div class="scroll">
-                <a href="#what">Wat is dit?</a>
+                <a>Wat is dit?</a>
                 <img src="assets/line.svg" alt="">
             </div>
 
