@@ -4,7 +4,6 @@ import Home from './Home.vue'
 import Lijst from './Lijst.vue'
 import Nieuw from './Nieuw.vue'
 import Contact from './Contact.vue'
-import Detail from './Detail.vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter);
@@ -14,9 +13,7 @@ const routes = [
   { path: '/', component: Home },
   { path: '/lijst', component: Lijst },
   { path: '/nieuw', component: Nieuw },
-  { path: '/contact', component: Contact },
-  { path: '/detail', component: Detail },
-]
+  { path: '/contact', component: Contact }]
 
 // 3. Create the router instance and pass the `routes` option
 // You can pass in additional options here, but let's
@@ -69,6 +66,11 @@ new Vue({
     });
   },
   methods: {
+    addVereniging: function(naam, ondernemingsnummer, beschrijving){
+      contract.addVereniging(naam, ondernemingsnummer, beschrijving, (error, value) => {
+              console.log(error);
+      });
+    },
     fetchVerenigingenLijst: function(){
       this.getNumVereniging().then( (num) => this.fetchVereniging(num)).then( (result) => {this.verenigingList = result});
     },
