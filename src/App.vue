@@ -9,4 +9,8 @@
 		text-align: center;
 		position: relative;
 	}
+	h1,
+	h2 {
+		font-weight: normal;
+	}
 </style>
