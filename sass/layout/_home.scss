@@ -5,12 +5,13 @@ section{
     width: 100vw;
     height: 100vh;
     &#eyecatcher {
-        background-image: url('../assets/bg.png');
+        background-image: url('../assets/bg2.jpg');
         background-position: center left;
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
         margin-top: -145px;
+        height: calc(100vh - 5px);
         .info {
             position: absolute;
             top: 5vh;
