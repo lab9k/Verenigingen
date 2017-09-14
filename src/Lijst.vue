@@ -9,8 +9,7 @@
         <div class="lijst_item"
               v-bind:class="{ open: isActiveListItem }"
               v-on:click="isActiveListItem = !isActiveListItem"
-              v-for="(item, index) in lijst"
-              :key="index">
+              v-for="item in lijst" :key='item.id'>
                 <div class="name">
                     <label>Naam: </label>
                     {{ item.naam }}
@@ -24,7 +23,7 @@
                 </div>
                 <div class="status">
                     Status:
-                    <div v-if="item.status == 1">{{ item.status }}</div>
+                    <div >{{ item.status }}</div>
                 </div>
           </h1>
         </div>
