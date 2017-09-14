@@ -2,8 +2,11 @@
     <div id="lijst">
       <h2>{{ title }}</h2>
       <div class="search-wrapper">
-        <input @input="updateLijst" type="text" v-model="search" placeholder="Search title.."/>
+        <input  @input="updateLijst" type="text" v-model="search" placeholder="Zoek naam.."/>
         <label>Search title:</label>
+        <button v-on:click='toonAlle'>
+          Alle verenigingen
+        </button>
       </div>
       <div class="wrapper">
         <div class="lijst_item"
@@ -42,22 +45,29 @@
                 lijst: []
             }
         },
+        mounted: function(){
+          this.lijst = Object.values(this.$root.verenigingList)
+        },
         methods: {
-            foldoutItemList: () => {
-                var item = document.getElementById('item_list');
-                item.classList.toggle('open');
-            },
-            updateLijst: function() {
-              this.lijst = Object.values(this.$root.verenigingList).filter( (post) =>  {
-                return post.naam.toLowerCase().includes(this.search.toLowerCase())
-              })
-            },
-            editVereniging: function(id) {
-                 let naam = document.getElementById("edit-vereniging-naam").value;
-                 let beschrijving = document.getElementById("edit-vereniging-beschrijving").value;
-                 let ondernemingsnummer = document.getElementById("edit-vereniging-ondernemingsnummer").value;
-                 this.$root.editVereniging(id, naam, ondernemingsnummer, beschrijving)
-            },
-        }
+          toonAlle: function(){
+            this.lijst = Object.values(this.$root.verenigingList)
+          },
+          foldoutItemList: () => {
+            var item = document.getElementById('item_list');
+            item.classList.toggle('open');
+          },
+          updateLijst: function() {
+            this.lijst = Object.values(this.$root.verenigingList).filter( (post) =>  {
+              console.log(this);
+              return post.naam.toLowerCase().includes(this.search.toLowerCase())
+            })
+          },
+          editVereniging: function(id) {
+            let naam = document.getElementById("edit-vereniging-naam").value;
+            let beschrijving = document.getElementById("edit-vereniging-beschrijving").value;
+            let ondernemingsnummer = document.getElementById("edit-vereniging-ondernemingsnummer").value;
+            this.$root.editVereniging(id, naam, ondernemingsnummer, beschrijving)
+          },
+      }
     }
 </script>

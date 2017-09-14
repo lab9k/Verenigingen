@@ -79,6 +79,7 @@ new Vue({
     },
     fetchVerenigingenLijst: function(){
       this.getNumVereniging().then( (num) => this.fetchVereniging(num)).then( (result) => {this.verenigingList = result});
+      console.log('loaded');
     },
     getNumVereniging: function() {
       return new Promise((resolve, reject) => contract.numVerenigingen.call(function(error, result) {
@@ -90,7 +91,7 @@ new Vue({
         }
       }))
     },
-    fetchVereniging: async function(index) {
+    fetchVereniging: function(index) {
       var dict = {}
       for (var i = 0; i < index; i++) {
         contract.getVereniging(i, function(err, res){
