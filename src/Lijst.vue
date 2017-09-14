@@ -26,6 +26,7 @@
                                 {{ item.beschrijving }}
                             </div>
                             <div class="status">
+                                <div>{{ item.status }}</div>
                                 <img v-bind:src="'assets/' + item.status + '.svg'" alt="Accepted" title="Status">
                             </div>
                             <button v-on:click='$root.acceptRequest(item.id)' >
@@ -35,17 +36,17 @@
                               afkeuren
                             </button>
                     </div>
+                  </div>
                 </div>
-            </div>
-        </div>
-        <footer>
-            <p>&copy Copyright - Lab9K</p>
-            <p><a href="">GitHub</a></p>
-            <div class="partners">
-                <a href="https://lab9k.github.io/" target="_blank"><img src="assets/partners/partner-lab9k.svg" alt=""></a>
-                <a href="https://stad.gent" target="_blank"><img src="assets/partners/partner-stadgent.svg" alt=""></a>
-            </div>
-        </footer>
+              </div>
+              <footer>
+                  <p>&copy Copyright - Lab9K</p>
+                  <p><a href="">GitHub</a></p>
+                  <div class="partners">
+                      <a href="https://lab9k.github.io/" target="_blank"><img src="assets/partners/partner-lab9k.svg" alt=""></a>
+                      <a href="https://stad.gent" target="_blank"><img src="assets/partners/partner-stadgent.svg" alt=""></a>
+                  </div>
+              </footer>
     </div>
 </template>
 
@@ -55,7 +56,7 @@
         data() {
             return {
                 title: 'Lijst',
-                activeListItem: false,
+                activeListItem: -1,
                 lijst: []
             }
         },
