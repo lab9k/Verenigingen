@@ -51,7 +51,13 @@
               this.lijst = Object.values(this.$root.verenigingList).filter( (post) =>  {
                 return post.naam.toLowerCase().includes(this.search.toLowerCase())
               })
-            }
+            },
+            editVereniging: function(id) {
+                 let naam = document.getElementById("edit-vereniging-naam").value;
+                 let beschrijving = document.getElementById("edit-vereniging-beschrijving").value;
+                 let ondernemingsnummer = document.getElementById("edit-vereniging-ondernemingsnummer").value;
+                 this.$root.editVereniging(id, naam, ondernemingsnummer, beschrijving)
+            },
         }
     }
 </script>

@@ -71,6 +71,12 @@ new Vue({
               console.log(error);
       });
     },
+    editVereniging: function(id, naam, ondernemingsnummer, beschrijving, (error, value) => {
+      contract.editVereniging(id, naam, ondernemingsnummer, beschrijving, (error, value) => {
+        if (error)
+          alert("error: ", error);
+      });
+    },
     fetchVerenigingenLijst: function(){
       this.getNumVereniging().then( (num) => this.fetchVereniging(num)).then( (result) => {this.verenigingList = result});
     },
@@ -93,6 +99,16 @@ new Vue({
       }
       return dict;
     },
+    acceptRequest: function(id) {
+      contract.denyRequest(id, (error, value) => {
+        console.log(error);
+      })
+    },
+    denyRequest: function(id) {
+      contract.denyRequest(id, (error, value) => {
+        console.log(error);
+      })
+    }
   },
   render: h => h(App),
   router: router,
