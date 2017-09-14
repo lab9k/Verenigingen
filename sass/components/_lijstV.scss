@@ -1,0 +1,21 @@
+#lijst {
+    ul {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 0;
+        text-align: left;
+        list-style: none;
+        li.lijst_item {
+            position: relative;
+            padding: 5px 10px;
+            border-bottom: 1px solid #eee;
+            height: 24px;
+            overflow: hidden;
+            transition: $trans;
+            &.open {
+                height: initial;
+            }
+        }
+    }
+}
