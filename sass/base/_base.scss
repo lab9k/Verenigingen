@@ -13,6 +13,11 @@ body {
     text-align: center;
 }
 
+h1,
+h2 {
+    font-weight: normal;
+}
+
 h1#titel {
     color: $primary;
     font-size: 3em;
@@ -32,12 +37,12 @@ img {
     }
 }
 
-ul {
+nav ul {
     list-style-type: none;
     padding: 0;
 }
 
-li {
+nav ul li {
     display: inline-block;
     margin: 0 10px;
 }
@@ -75,11 +80,17 @@ form {
         height: 50px;
         border: none;
         opacity: 0.9;
+        background: $primary;
+        color: $white;
         &:hover {
             transition: $trans;
             opacity: 1;
             cursor: pointer;
         }
+    }
+    label {
+        height: 24px;
+        margin: 0;
     }
 }
 
