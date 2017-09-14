@@ -1,24 +1,6 @@
 <template>
-    <div id="app">
-        <img src="assets/img/triangle-blue.svg" alt="" class="triangle-blue">
-            
-        <div class="zoeken">
-            {{ lijst }}
-            <form action="" class="zoek-vereniging">
-                <h2>Zoek naar uw vereniging</h2>
-
-                <input type="text" id="inputveld"/>
-
-                <button v-on:click="search">
-                    zoeken
-                </button>
-                
-                <!-- <button v-on:click="fetchVereniging" >
-                    Maar dan kunt ge er iets inzetten
-                </button> -->
-            </form>
-            <img src="assets/img/triangle-white.svg" alt="" class="triangle-white">
-        </div>
+    <div id="nieuw">
+        <h2>{{ msg }}</h2>
 
         <form action="" class="add-vereniging-form">
             <label for="new-vereniging-naam">Naam</label>
@@ -32,30 +14,6 @@
 
             <button id="addVerenigingBtn" v-on:click="addVereniging">Voeg Toe!</button>
         </form>
-
-        <hr>
-
-        <!-- <form class="edit-vereniging-form">
-            <label for="edit-vereniging-naam">Naam</label>
-            <input type="text" id="edit-vereniging-naam">
-
-            <label for="edit-vereniging-beschrijving">Beschrijving</label>
-            <input type="text" id="edit-vereniging-beschrijving">
-
-            <label for="edit-vereniging-ondernemingsnummer">Ondernemingsnummer</label>
-            <input type="text" id="edit-vereniging-ondernemingsnummer">
-
-            <button id="editVerenigingBtn" v-on:click="addVereniging">Edit</button>
-        </form> 
-
-        <hr>-->
-
-        <form class="accept-deny-form">
-            <label for="Vereniging-id">Id:</label>
-            <input type="text" id="Vereniging-id" placeholder="0"></input>
-            <button id="acceptRequestBTN" v-on:click="acceptRequest">Accept!</button>
-            <button id="denyRequestBTN" v-on:click="denyRequest">Deny!</button>
-        </form>
     </div>
 </template>
 
@@ -65,6 +23,7 @@
 
         contractAddress: "0x91bc4e5851b9cf25dac9a39f567fb94236c6dce0",
     }
+
     if (typeof web3 !== "undefined") {
         // Use MetaMask's provider
         window.web3 = new Web3(web3.currentProvider);
@@ -72,19 +31,15 @@
         alert("No web3? You should consider trying MetaMask!");
         // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
     }
+
     const contract = web3.eth.contract(config.dappInterface).at(config.contractAddress);
-    const verenigingList = []
 
     export default {
-        name: 'app',
+        name: 'nieuw',
         data() {
             return {
-                msg: 'Welcome to Your Vue.js App',
-                lijst: verenigingList
+                msg: 'Voeg nieuwe vereniging toe'
             }
-        },
-        mounted: function() {
-            this.fetchVereniging()
         },
         methods: {
             addVereniging: () => {
@@ -99,66 +54,7 @@
                         console.log(value);
                     }
                 });
-            },
-            editVereniging: () => {
-                let naam = document.getElementById("edit-vereniging-naam").value;
-                let beschrijving = document.getElementById("edit-vereniging-beschrijving").value;
-                let ondernemingsnummer = document.getElementById("edit-vereniging-ondernemingsnummer").value;
-                let id = document.getElementById("edit-vereniging-id").value;
-                contract.editVereniging(id, naam, ondernemingsnummer, beschrijving, (error, value) => {
-                    if (error)
-                        console.log("error: ", error);
-                    else
-                        console.log("value: ", value);
-                });
-            },
-            fetchVereniging: () => {
-                verenigingList.splice(0, verenigingList.length)
-                contract.numVerenigingen.call(function(err, res) {
-                    for (var i = 0; i < res.c[0]; i++) {
-                        contract.getVereniging(i, (err, res) => {
-                            verenigingList.push(res);
-                        })
-                    }
-
-                });
-            },
-            searchVereniging: function(keyword, list) {
-                var results = []
-                var rx = new RegExp('.*' + keyword + '.*');
-                for (var woord of list) {
-                    if (rx.test(woord[0])) {
-                        results.push(woord)
-                    }
-                }
-                return results;
-            },
-            search: function() {
-                console.log(this.searchVereniging(document.getElementById("inputveld").value, verenigingList))
-            },
-            acceptRequest: function() {
-                let id = document.getElementById("Vereniging-id").value;
-                console.log("Accept", id);
-                contract.acceptRequest(id, (error, value) => {
-                    if (error) {
-                        console.log(error);
-                    } else {
-                        console.log(value);
-                    }
-                })
-            },
-            denyRequest: function() {
-                let id = document.getElementById("Vereniging-id").value;
-                console.log("Deny", id);
-                contract.denyRequest(id, (error, value) => {
-                    if (error) {
-                        console.log(error);
-                    } else {
-                        console.log(value);
-                    }
-                })
             }
         }
-
     }
 </script>
