@@ -47,4 +47,3 @@ Meer info: https://stad.gent/cultuur-sport-vrije-tijd/producten/erkenning-sociaa
 # Level 5
 ## File upload voor amdmin
 * Bij acceptatie loadt de admin ook en pdf van het gemeentebesluit op.
-

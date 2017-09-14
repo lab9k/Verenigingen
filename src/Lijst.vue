@@ -5,9 +5,21 @@
             <div class="min-height">
                 <div class="search-wrapper">
                     <input @input="updateLijst" type="text" v-model="search" placeholder="Search title.."/>
+                    <button v-on:click='toonAlle'>
+                      Alle verenigingen
+                    </button>
                 </div>
-                <div class="list-wrapper">
-                    <div class="list_item"
+                <div class="wrapper">
+                  <div class="lijst_item"
+                      v-bind:class="{ open: isActiveListItem }"
+                      v-on:click="isActiveListItem = !isActiveListItem"
+                      v-for="item in lijst" :key='item.id'>
+                      <div class="name">
+                          <label>Naam: </label>
+                          {{ item.naam }}
+                      </div>
+                      <div class="list-wrapper">
+                        <div class="list_item"
                         v-bind:class="{ open: isActiveListItem }"
                         v-on:click="isActiveListItem = !isActiveListItem"
                         v-for="(item, index) in lijst"
@@ -30,6 +42,12 @@
                     </div>
                 </div>
             </div>
+                <button v-on:click='$root.acceptRequest(item.id)' >
+                  goedkeuren
+                </button>
+                <button v-on:click='$root.denyRequest(item.id)' >
+                  afkeuren
+                </button>
         </div>
         <footer>
             <p>&copy Copyright - Lab9K</p>
@@ -52,16 +70,29 @@
                 lijst: []
             }
         },
+        mounted: function(){
+          this.lijst = Object.values(this.$root.verenigingList)
+        },
         methods: {
-            foldoutItemList: () => {
-                var item = document.getElementById('item_list');
-                item.classList.toggle('open');
-            },
-            updateLijst: function() {
-                this.lijst = Object.values(this.$root.verenigingList).filter( (post) =>  {
-                    return post.naam.toLowerCase().includes(this.search.toLowerCase())
-                })
-            }
-        }
+          toonAlle: function(){
+            this.lijst = Object.values(this.$root.verenigingList)
+          },
+          foldoutItemList: () => {
+            var item = document.getElementById('item_list');
+            item.classList.toggle('open');
+          },
+          updateLijst: function() {
+            this.lijst = Object.values(this.$root.verenigingList).filter( (post) =>  {
+              console.log(this);
+              return post.naam.toLowerCase().includes(this.search.toLowerCase())
+            })
+          },
+          editVereniging: function(id) {
+            let naam = document.getElementById("edit-vereniging-naam").value;
+            let beschrijving = document.getElementById("edit-vereniging-beschrijving").value;
+            let ondernemingsnummer = document.getElementById("edit-vereniging-ondernemingsnummer").value;
+            this.$root.editVereniging(id, naam, ondernemingsnummer, beschrijving)
+          },
+      }
     }
 </script>
