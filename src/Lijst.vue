@@ -28,6 +28,12 @@
                     Status:
                     <div >{{ item.status }}</div>
                 </div>
+                <button v-on:click='$root.acceptRequest(item.id)' >
+                  goedkeuren
+                </button>
+                <button v-on:click='$root.denyRequest(item.id)' >
+                  afkeuren
+                </button>
           </h1>
         </div>
       </div>

@@ -94,11 +94,13 @@ new Vue({
       return dict;
     },
     acceptRequest: function(id) {
-      contract.denyRequest(id, (error, value) => {
+      console.log('accept');
+      contract.acceptRequest(id, (error, value) => {
         console.log(error);
       })
     },
     denyRequest: function(id) {
+      console.log('deny');
       contract.denyRequest(id, (error, value) => {
         console.log(error);
       })
