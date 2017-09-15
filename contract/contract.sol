@@ -98,7 +98,7 @@ contract VerenigingenContract is Owned {
         }
         verenigingen[id].status = Status.PENDING;
         verenigingen[id].lastChange = now;
-        editVerenigingEvent(id, _naam, _ondernemingsnummer, _beschrijving, now);
+        editVerenigingEvent(id, verenigingen[id].naam,verenigingen[id].ondernemingsnummer, verenigingen[id].beschrijving, now);
     }
 
     function getVereniging(uint id) constant returns(string, string, string, Status, uint, uint) {
