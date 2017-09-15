@@ -10,7 +10,7 @@
           </button>
         </div>
         <div class="list-wrapper">
-          <div class="list_item"  v-bind:class="{ open: (activeListItem == item.id) }" v-on:click.self="toggleCollapse(item.id)" v-for="item in lijst" :key='parseInt(item.id)'>
+          <div class="list_item" v-bind:class="{ open: (activeListItem == item.id) }" v-on:click.self="toggleCollapse(item.id)" v-for="item in lijst" :key='parseInt(item.id)'>
             <div class="border-left" v-on:click.self="toggleCollapse(item.id)"></div>
             <div class="name" v-on:click.self="toggleCollapse(item.id)">
               <strong v-on:click.self="toggleCollapse(item.id)">{{ item.naam }}</strong>
@@ -132,6 +132,7 @@ export default {
         parent.replaceChild(editBtn, undoBtn);
         parent.removeChild(applyBtn);
       });
+      //kill(myself);
       return false;
     },
     toonAlle: function() {
