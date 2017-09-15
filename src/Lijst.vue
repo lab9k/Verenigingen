@@ -10,29 +10,29 @@
           </button>
         </div>
         <div class="list-wrapper">
-          <div class="list_item" v-bind:class="{ open: (activeListItem == item.id) }" v-on:click.self="toggleCollapse(item.id)" v-for="item in lijst" :key='parseInt(item.id)'>
-            <div class="border-left"></div>
+          <div class="list_item"  v-bind:class="{ open: (activeListItem == item.id) }" v-on:click.self="toggleCollapse(item.id)" v-for="item in lijst" :key='parseInt(item.id)'>
+            <div class="border-left" v-on:click.self="toggleCollapse(item.id)"></div>
             <div class="name" v-on:click.self="toggleCollapse(item.id)">
-              <strong>{{ item.naam }}</strong>
+              <strong v-on:click.self="toggleCollapse(item.id)">{{ item.naam }}</strong>
             </div>
             <div class="ondernemingsnummer">
               Ondernemingsnummer:
               <span>{{ item.ondernemingsnummer }}</span>
             </div>
-             <div>
+            <div>
               {{item.lastChange}}
-             </div>
+            </div>
             <div class="description">{{ item.beschrijving }}</div>
-             <div class="status">
+            <div class="status">
               <img v-bind:src="'assets/' + item.status + '.svg'" alt="Accepted" title="Status">
-             </div>
+            </div>
             <button v-on:click='$root.acceptRequest(item.id)'>
               goedkeuren
             </button>
             <button v-on:click='$root.denyRequest(item.id)'>
               afkeuren
             </button>
-            <button v-on:click="changeToInput">edit</button>
+            <button v-on:click="changeToInput($event,item.id)">edit</button>
           </div>
         </div>
       </div>
@@ -57,7 +57,7 @@ export default {
     return {
       title: 'Lijst',
       activeListItem: -1,
-      lijst: []
+      lijst: [],
     }
   },
   mounted: function() {
@@ -71,8 +71,9 @@ export default {
         this.activeListItem = id
       }
     },
-    changeToInput: (event) => {
+    changeToInput: function(event, id) {
       event.preventDefault();
+      const self = this;
       let editBtn = event.target;
       let parent = editBtn.parentNode;
       let childNodes = parent.childNodes;
@@ -80,33 +81,34 @@ export default {
       let oldName, oldDescription, oldNumber;
       for (let i = 0; i < childNodes.length; i++) {
         let node = childNodes[i];
-        if (node.className == "name") {
-          oldName = node;
-          nameField = document.createElement("input");
-          nameField.setAttribute("class", "name");
-          nameField.setAttribute("value", node.childNodes[0].innerHTML);
-          parent.replaceChild(nameField, node);
-        }
-        if (node.className == "description") {
-          oldDescription = node;
-          descriptionField = document.createElement("input");
-          descriptionField.setAttribute("class", "description");
-          descriptionField.setAttribute("value", node.innerHTML);
-          parent.replaceChild(descriptionField, node);
-        }
-        if (node.className == "ondernemingsnummer") {
-          oldNumber = node;
-          numberField = document.createElement("input");
-          numberField.setAttribute("class", "ondernemingsnummer");
-          numberField.setAttribute("value", node.childNodes[1].innerHTML);
-          parent.replaceChild(numberField, node);
+        switch (node.className) {
+          case "name":
+            oldName = node;
+            nameField = document.createElement("input");
+            nameField.setAttribute("class", "name");
+            nameField.setAttribute("value", node.childNodes[0].innerHTML);
+            parent.replaceChild(nameField, node);
+            break;
+          case "description":
+            oldDescription = node;
+            descriptionField = document.createElement("input");
+            descriptionField.setAttribute("class", "description");
+            descriptionField.setAttribute("value", node.innerHTML);
+            parent.replaceChild(descriptionField, node);
+            break;
+          case "ondernemingsnummer":
+            oldNumber = node;
+            numberField = document.createElement("input");
+            numberField.setAttribute("class", "ondernemingsnummer");
+            numberField.setAttribute("value", node.childNodes[1].innerHTML);
+            parent.replaceChild(numberField, node);
+            break;
+          default:
+            break;
         }
       }
       let applyBtn = document.createElement("button");
       applyBtn.innerHTML = "apply";
-      applyBtn.addEventListener("click", (event) => {
-        console.log("TODO: call editVereniging!");
-      });
       parent.appendChild(applyBtn);
 
       let undoBtn = document.createElement("button");
@@ -119,7 +121,17 @@ export default {
         parent.removeChild(applyBtn)
       });
       parent.replaceChild(undoBtn, editBtn);
-
+      applyBtn.addEventListener("click", (event) => {
+        let naam = nameField.value;
+        let ondernemingsnummer = numberField.value;
+        let beschrijving = descriptionField.value;
+        self.editVereniging(id, naam, ondernemingsnummer, beschrijving);
+        parent.replaceChild(oldName, nameField);
+        parent.replaceChild(oldDescription, descriptionField);
+        parent.replaceChild(oldNumber, numberField);
+        parent.replaceChild(editBtn, undoBtn);
+        parent.removeChild(applyBtn);
+      });
       return false;
     },
     toonAlle: function() {
@@ -134,10 +146,7 @@ export default {
         return post.naam.toLowerCase().includes(this.search.toLowerCase())
       })
     },
-    editVereniging: function(id) {
-      let naam = document.getElementById("edit-vereniging-naam").value;
-      let beschrijving = document.getElementById("edit-vereniging-beschrijving").value;
-      let ondernemingsnummer = document.getElementById("edit-vereniging-ondernemingsnummer").value;
+    editVereniging: function(id, naam, beschrijving, ondernemingsnummer) {
       this.$root.editVereniging(id, naam, ondernemingsnummer, beschrijving)
     },
   }
