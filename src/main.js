@@ -45,40 +45,34 @@ new Vue({
     var self = this;
     var event = contract.statuschangedEvent(function(error, result) {
       if (!error){
-        console.log(result);
         self.verenigingList[result.args.id].status = result.args.status
         self.verenigingList[result.args.id].lastChange = new Date(result.args.datetime * 1000)
       }
     });
     var event = contract.editVerenigingEvent(function(error, result) {
       if (!error){
-        console.log(result);
         self.verenigingList[result.args.id] = {'naam': result.args._naam, 'ondernemingsnummer': result.args._ondernemingsnummer, 'beschrijving': result.args._beschrijving, 'status': 2, 'lastChange' : new Date(result.args.datetime * 1000), 'id' : result.args.id};
       }
     });
     var event = contract.addVerenigingEvent(function(error, result) {
       if (!error){
-        console.log(result);
         self.verenigingList[result.args.id] = {'naam': result.args._naam, 'ondernemingsnummer': result.args._ondernemingsnummer, 'beschrijving': result.args._beschrijving, 'status': 2, 'lastChange' : new Date(result.args.datetime * 1000), 'id' : result.args.id};
-        console.log(self.verenigingList[result.args.id]);
       }
     });
   },
   methods: {
     addVereniging: function(naam, ondernemingsnummer, beschrijving){
       contract.addVereniging(naam, ondernemingsnummer, beschrijving, (error, value) => {
-              console.log(error);
+        console.log(error);
       });
     },
     editVereniging: function(id, naam, ondernemingsnummer, beschrijving) {
       contract.editVereniging(id, naam, ondernemingsnummer, beschrijving, (error, value) => {
-        if (error)
-          alert("error: ", error);
+        console.log(error);
       });
     },
     fetchVerenigingenLijst: function(){
       this.getNumVereniging().then( (num) => this.fetchVereniging(num)).then( (result) => {this.verenigingList = result});
-      console.log('loaded');
     },
     getNumVereniging: function() {
       return new Promise((resolve, reject) => contract.numVerenigingen.call(function(error, result) {
@@ -94,7 +88,6 @@ new Vue({
       for (var i = 0; i < index; i++) {
         contract.getVereniging(i, function(err, res){
           dict[res[5]] = {'naam': res[0], 'ondernemingsnummer': res[1], 'beschrijving': res[2], 'status': res[3], 'lastChange' : new Date(res[4] * 1000), 'id' : res[5]};
-          console.log(dict);
         })
       }
       return dict;
