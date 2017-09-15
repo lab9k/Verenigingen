@@ -22,6 +22,9 @@
                                 Ondernemingsnummer:
                                 {{ item.ondernemingsnummer }}
                             </div>
+                            <div>
+                              {{item.lastChange}}
+                            </div>
                             <div class="description">
                                 {{ item.beschrijving }}
                             </div>

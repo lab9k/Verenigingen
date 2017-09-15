@@ -45,17 +45,22 @@ new Vue({
     var self = this;
     var event = contract.statuschangedEvent(function(error, result) {
       if (!error){
+        console.log(result);
         self.verenigingList[result.args.id].status = result.args.status
+        self.verenigingList[result.args.id].lastChange = new Date(result.args.datetime * 1000)
       }
     });
     var event = contract.editVerenigingEvent(function(error, result) {
       if (!error){
-        self.verenigingList[result.args.id] = {'naam': result.args._naam, 'ondernemingsnummer': result.args._ondernemingsnummer, 'beschrijving': result.args._beschrijving, 'status': 2};
+        console.log(result);
+        self.verenigingList[result.args.id] = {'naam': result.args._naam, 'ondernemingsnummer': result.args._ondernemingsnummer, 'beschrijving': result.args._beschrijving, 'status': 2, 'lastChange' : new Date(result.args.datetime * 1000), 'id' : result.args.id};
       }
     });
     var event = contract.addVerenigingEvent(function(error, result) {
       if (!error){
-        self.verenigingList[result.args.id] = {'naam': result.args._naam, 'ondernemingsnummer': result.args._ondernemingsnummer, 'beschrijving': result.args._beschrijving, 'status': 2};
+        console.log(result);
+        self.verenigingList[result.args.id] = {'naam': result.args._naam, 'ondernemingsnummer': result.args._ondernemingsnummer, 'beschrijving': result.args._beschrijving, 'status': 2, 'lastChange' : new Date(result.args.datetime * 1000), 'id' : result.args.id};
+        console.log(self.verenigingList[result.args.id]);
       }
     });
   },
@@ -88,19 +93,18 @@ new Vue({
       var dict = {}
       for (var i = 0; i < index; i++) {
         contract.getVereniging(i, function(err, res){
-          dict[res[4]] = {'naam': res[0], 'ondernemingsnummer': res[1], 'beschrijving': res[2], 'status': res[3], 'id' : res[4]};
+          dict[res[5]] = {'naam': res[0], 'ondernemingsnummer': res[1], 'beschrijving': res[2], 'status': res[3], 'lastChange' : new Date(res[4] * 1000), 'id' : res[5]};
+          console.log(dict);
         })
       }
       return dict;
     },
     acceptRequest: function(id) {
-      console.log('accept');
       contract.acceptRequest(id, (error, value) => {
         console.log(error);
       })
     },
     denyRequest: function(id) {
-      console.log('deny');
       contract.denyRequest(id, (error, value) => {
         console.log(error);
       })
