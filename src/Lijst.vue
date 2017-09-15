@@ -25,10 +25,6 @@
                             <div class="description">
                                 {{ item.beschrijving }}
                             </div>
-                            <div class="status">
-                                <div>{{ item.status }}</div>
-                                <img v-bind:src="'assets/' + item.status + '.svg'" alt="Accepted" title="Status">
-                            </div>
                             <button v-on:click='$root.acceptRequest(item.id)' >
                               goedkeuren
                             </button>
