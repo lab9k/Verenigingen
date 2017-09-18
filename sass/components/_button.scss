@@ -1,14 +1,57 @@
-a.btn {
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    padding: 5px 10px;
+a {
+    &.btn {
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        padding: 5px 10px;
 
-    color: $white;
-    border: 2px solid $primary;
-    &:hover {
-        transition: $trans;
-        transition-duration: 512ms;
-        background: $primary;
+        color: $white;
+        border: 2px solid $primary;
+        &:hover {
+            transition: $trans;
+            transition-duration: 512ms;
+            background: $primary;
+        }
+    }
+    &.alleV {
+        position: absolute;
+        right: 0;
+        text-decoration: underline;
+        font-size: 14px;
+        &:hover {
+            color: $primary;
+            cursor: pointer;
+        }
+    }
+}
+.actions {
+    margin-top: 16px;
+    margin-bottom: 2px;
+    button {
+        color: $white;
+        border: none;
+        padding: 8px 16px;
+        outline: none;
+        &.y {
+            background: $y;
+            &:hover {
+                background: darken($y, 5%);
+            }
+        }
+        &.n {
+            background: $n;
+            &:hover {
+                background: darken($n, 5%);
+            }
+        }
+        &.e {
+            background: $gray-light;
+            &:hover {
+                background: darken($gray-light, 5%);
+            }
+        }
+        &:hover {
+            cursor: pointer;
+        }
     }
 }
