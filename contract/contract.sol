@@ -42,6 +42,7 @@ contract VerenigingenContract is Owned {
         string ondernemingsnummer;
         string beschrijving;
         Status status;
+        uint lastChange;
     }
     uint public numVerenigingen = 0;
     mapping(uint => Vereniging) verenigingen;
@@ -55,6 +56,7 @@ contract VerenigingenContract is Owned {
             revert();
         }
         verenigingen[id].status = Status.ACCEPTED;
+        verenigingen[id].lastChange = now;
         statuschangedEvent(id, Status.ACCEPTED, now);
     }
 
@@ -63,6 +65,7 @@ contract VerenigingenContract is Owned {
             revert();
         }
         verenigingen[id].status = Status.DENIED;
+        verenigingen[id].lastChange = now;
         statuschangedEvent(id, Status.DENIED, now);
     }
 
@@ -71,7 +74,8 @@ contract VerenigingenContract is Owned {
             naam:_naam,
             ondernemingsnummer:_ondernemingsnummer,
             beschrijving:_beschrijving,
-            status:Status.PENDING
+            status:Status.PENDING,
+            lastChange:now
         });
         addVerenigingEvent(numVerenigingen, _naam, _ondernemingsnummer, _beschrijving, now);
         numVerenigingen++;
@@ -83,20 +87,21 @@ contract VerenigingenContract is Owned {
         string _ondernemingsnummer,
         string _beschrijving) isAdmin
         {
-        if(_naam.length != 0 && _naam != verenigingen[id].naam){
+        if(bytes(_naam).length != 0) {
           verenigingen[id].naam = _naam;
         }
-        if(_ondernemingsnummer.length != 0 && _ondernemingsnummer != verenigingen[id].ondernemingsnummer){
+        if(bytes(_ondernemingsnummer).length != 0) {
           verenigingen[id].ondernemingsnummer = _ondernemingsnummer;
         }
-        if(_beschrijving.length != 0 && _beschrijving != verenigingen[id].beschrijving){
+        if(bytes(_beschrijving).length != 0) {
           verenigingen[id].beschrijving = _beschrijving;
         }
         verenigingen[id].status = Status.PENDING;
-        editVerenigingEvent(id, _naam, _ondernemingsnummer, _beschrijving, now);
+        verenigingen[id].lastChange = now;
+        editVerenigingEvent(id, verenigingen[id].naam,verenigingen[id].ondernemingsnummer, verenigingen[id].beschrijving, now);
     }
 
-    function getVereniging(uint id) constant returns(string, string, string, Status) {
-        return (verenigingen[id].naam,verenigingen[id].ondernemingsnummer,verenigingen[id].beschrijving,verenigingen[id].status);
+    function getVereniging(uint id) constant returns(string, string, string, Status, uint, uint) {
+        return (verenigingen[id].naam,verenigingen[id].ondernemingsnummer,verenigingen[id].beschrijving,verenigingen[id].status,verenigingen[id].lastChange, id);
     }
 }

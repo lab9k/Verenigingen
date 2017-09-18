@@ -1,21 +1,75 @@
 #lijst {
-    ul {
-        width: 100%;
-        max-width: 500px;
-        margin: 0 auto;
-        padding: 0;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    .min-height {        
+        min-height: calc(100vh - 425px);
+    }
+    .search-wrapper input {
+        width: calc(100% - 20px);
+        height: 40px;
+        padding: 5px 10px;
+        border: none;
+        outline: none;
+
+        box-shadow: $shadow;
+    }
+    .list-wrapper {
+        background: red;
         text-align: left;
-        list-style: none;
-        li.lijst_item {
+        margin-top: 16px;
+        .list_item {
             position: relative;
-            padding: 5px 10px;
-            border-bottom: 1px solid #eee;
-            height: 24px;
+            background: $white;
+            box-shadow: $shadow;
+            height: 36px;
+            padding: 5px;
             overflow: hidden;
-            transition: $trans;
             &.open {
                 height: initial;
             }
+            .border-left {
+                width: 3px;
+                height: 100%;
+                background: linear-gradient(-45deg,#009ee3, #63c6c8);
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+            .name {
+                line-height: 2.2em;
+            }
+            .status {
+                img {
+                    position: absolute;
+                    right: 8px;
+                    top: 8px;
+                    height: auto;
+                    width: 28px;
+                }
+            }
         }
     }
+    // ul {
+    //     width: 100%;
+    //     max-width: 500px;
+    //     margin: 0 auto;
+    //     padding: 0;
+    //     text-align: left;
+    //     list-style: none;
+    //     li.lijst_item {
+    //         position: relative;
+    //         padding: 5px 10px;
+    //         border-bottom: 1px solid #eee;
+    //         height: 24px;
+    //         overflow: hidden;
+    //         transition: $trans;
+    //         background: $white;
+
+    //         box-shadow: $box-shadow;
+    //         &.open {
+    //             height: initial;
+    //         }
+    //     }
+    // }
 }
