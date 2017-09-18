@@ -19,18 +19,17 @@
 						<h3 v-on:click.self="toggleCollapse(item.id)">{{ item.naam }}</h3>
 					</div>
 
-					<div class="description">
-						<em>{{ item.beschrijving }}</em>
-						<div class="ondernemingsnummer">
-							<span>Ondernemingsnummer:</span>
-							<em>{{ item.ondernemingsnummer }}</em>
-						</div>
-					</div>
+							<div class="name" v-on:click.self="toggleCollapse(item.id)">
+								<h3 v-on:click.self="toggleCollapse(item.id)">{{ item.naam }}</h3>
+							</div>
 
-					<div class="lastchanged">
-						<span>Laatst geüpdatet:</span>
-						<em>{{ timeAgo(item.lastChange) }}</em>
-					</div>
+							<div class="description">
+								<em>{{ item.beschrijving }}</em>
+								<div class="ondernemingsnummer">
+									<span>Ondernemingsnummer:</span>
+									<em>{{ item.ondernemingsnummer }}</em>
+								</div>
+							</div>
 
 					<div class="status">
 						<img v-bind:src="'assets/' + item.status + '.svg'" alt="Accepted" title="Status">
@@ -76,34 +75,32 @@
 							<i class="ion-close"></i> Ongedaan maken
 						</button>
 					</div>
-				</form>
+				</div>
 			</div>
-			</div>
-		</div>
 		</div>
 		<footer>
-		<p>&copy Copyright - Lab9K</p>
-		<p>
-			<a href="">GitHub</a>
-		</p>
-		<div class="partners">
-			<a href="https://lab9k.github.io/" target="_blank"><img src="assets/partners/partner-lab9k.svg" alt=""></a>
-			<a href="https://stad.gent" target="_blank"><img src="assets/partners/partner-stadgent.svg" alt=""></a>
-		</div>
+			<p>&copy Copyright - Lab9K</p>
+			<p>
+				<a href="">GitHub</a>
+			</p>
+			<div class="partners">
+				<a href="https://lab9k.github.io/" target="_blank"><img src="assets/partners/partner-lab9k.svg" alt=""></a>
+				<a href="https://stad.gent" target="_blank"><img src="assets/partners/partner-stadgent.svg" alt=""></a>
+			</div>
 		</footer>
 	</div>
-	</template>
+</template>
 
 	<script>
-	export default {
+export default {
 	name: 'lijst',
 	data() {
 		return {
-		title: 'Lijst',
-		activeListItem: -1,
-		editingListItem: -1,
-		unsubmitted: {},
-		lijst: []
+			title: 'Lijst',
+			activeListItem: -1,
+			editingListItem: -1,
+			unsubmitted: {},
+			lijst: []
 		}
 	},
 	mounted: function() {
@@ -139,10 +136,10 @@
 		editItem: function(item) {
 			if (this.editingListItem == item.id) {
 				this.editingListItem = -1,
-				this.unsubmitted = {}
+					this.unsubmitted = {}
 			} else {
 				this.editingListItem = item.id,
-				this.unsubmitted = Object.assign({}, item);
+					this.unsubmitted = Object.assign({}, item);
 			}
 		},
 		toggleCollapse: function(id) {
@@ -157,7 +154,7 @@
 		},
 		foldoutItemList: () => {
 			var item = document.getElementById('item_list');
-		item.classList.toggle('open');
+			item.classList.toggle('open');
 		},
 		updateLijst: function() {
 			this.lijst = Object.values(this.$root.verenigingList).filter((post) => {
@@ -169,5 +166,5 @@
 			this.editItem(item)
 		},
 	}
-	}
-	</script>
+}
+</script>
