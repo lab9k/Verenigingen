@@ -2,7 +2,7 @@
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
-    .min-height {        
+    .min-height {
         min-height: calc(100vh - 425px);
     }
     .search-wrapper input {
@@ -27,6 +27,20 @@
             overflow: hidden;
             &.open {
                 height: initial;
+                &.editing {
+                    .edit {
+                      display: block;
+                    }
+                    .view {
+                      display: none;
+                    }
+                }
+                .edit {
+                  display: none;
+                }
+                .view {
+                  display: block;
+                }
             }
             .border-left {
                 width: 3px;
