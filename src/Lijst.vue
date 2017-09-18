@@ -57,6 +57,7 @@ export default {
     return {
       title: 'Lijst',
       activeListItem: -1,
+      editingListItem: null,
       lijst: [],
     }
   },
@@ -70,70 +71,6 @@ export default {
       } else {
         this.activeListItem = id
       }
-    },
-    changeToInput: function(event, id) {
-      event.preventDefault();
-      const self = this;
-      let editBtn = event.target;
-      let parent = editBtn.parentNode;
-      let childNodes = parent.childNodes;
-      let nameField, descriptionField, numberField;
-      let oldName, oldDescription, oldNumber;
-      for (let i = 0; i < childNodes.length; i++) {
-        let node = childNodes[i];
-        switch (node.className) {
-          case "name":
-            oldName = node;
-            nameField = document.createElement("input");
-            nameField.setAttribute("class", "name");
-            nameField.setAttribute("value", node.childNodes[0].innerHTML);
-            parent.replaceChild(nameField, node);
-            break;
-          case "description":
-            oldDescription = node;
-            descriptionField = document.createElement("input");
-            descriptionField.setAttribute("class", "description");
-            descriptionField.setAttribute("value", node.innerHTML);
-            parent.replaceChild(descriptionField, node);
-            break;
-          case "ondernemingsnummer":
-            oldNumber = node;
-            numberField = document.createElement("input");
-            numberField.setAttribute("class", "ondernemingsnummer");
-            numberField.setAttribute("value", node.childNodes[1].innerHTML);
-            parent.replaceChild(numberField, node);
-            break;
-          default:
-            break;
-        }
-      }
-      let applyBtn = document.createElement("button");
-      applyBtn.innerHTML = "apply";
-      parent.appendChild(applyBtn);
-
-      let undoBtn = document.createElement("button");
-      undoBtn.innerHTML = "undo";
-      undoBtn.addEventListener("click", (event) => {
-        parent.replaceChild(oldName, nameField);
-        parent.replaceChild(oldDescription, descriptionField);
-        parent.replaceChild(oldNumber, numberField);
-        parent.replaceChild(editBtn, undoBtn);
-        parent.removeChild(applyBtn)
-      });
-      parent.replaceChild(undoBtn, editBtn);
-      applyBtn.addEventListener("click", (event) => {
-        let naam = nameField.value;
-        let ondernemingsnummer = numberField.value;
-        let beschrijving = descriptionField.value;
-        self.editVereniging(id, naam, ondernemingsnummer, beschrijving);
-        parent.replaceChild(oldName, nameField);
-        parent.replaceChild(oldDescription, descriptionField);
-        parent.replaceChild(oldNumber, numberField);
-        parent.replaceChild(editBtn, undoBtn);
-        parent.removeChild(applyBtn);
-      });
-      //kill(myself);
-      return false;
     },
     toonAlle: function() {
       this.lijst = Object.values(this.$root.verenigingList)
