@@ -18,17 +18,17 @@
 						<h3 v-on:click.self="toggleCollapse(item.id)">{{ item.naam }}</h3>
 					</div>
 
-					<div class="lastchanged">
-						<span>Laatst geüpdatet:</span>
-						<em>{{ timeAgo(item.lastChange) }}</em>
-					</div>
-
 					<div class="description">
 						<em>{{ item.beschrijving }}</em>
 						<div class="ondernemingsnummer">
-							<span>ON:</span>
+							<span>Ondernemingsnummer:</span>
 							<em>{{ item.ondernemingsnummer }}</em>
 						</div>
+					</div>
+
+					<div class="lastchanged">
+						<span>Laatst geüpdatet:</span>
+						<em>{{ timeAgo(item.lastChange) }}</em>
 					</div>
 
 					<div class="status">
@@ -50,16 +50,16 @@
 				</div>
 				<form class="edit">
 					<div class="border-left" v-on:click.self="toggleCollapse(item.id)"></div>
-					<div class="name" >
-						<label>Naam</label>
+					<div class="name-edit" >
+						<strong>Naam</strong>
 						<input v-model="unsubmitted.naam"/>
 					</div>
-					<div class="ondernemingsnummerr">
-						<label>Ondernemingsnummer</label>
+					<div class="ondernemingsnummer-edit">
+						<strong>Ondernemingsnummer</strong>
 						<input v-model="unsubmitted.ondernemingsnummer"/>
 					</div>
-					<div class="descriptionn">
-						<label>Beschrijving</label>
+					<div class="description-edit">
+						<strong>Beschrijving</strong>
 						<textarea v-model="unsubmitted.beschrijving" rows="5"/>
 					</div>
 					<div class="status">
@@ -75,7 +75,6 @@
 					</div>
 				</form>
 			</div>
-			<em>ON: Ondernemingsnummer</em>
 			</div>
 		</div>
 		</div>

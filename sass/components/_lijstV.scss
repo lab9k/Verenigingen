@@ -1,6 +1,6 @@
 #lijst {
     width: 100%;
-    max-width: 500px;
+    max-width: 800px;
     margin: 0 auto;
     .min-height {
         min-height: calc(100vh - 425px);
@@ -26,10 +26,20 @@
             background: $white;
             box-shadow: $shadow;
             height: 46px;
-            padding: 5px 10px;
+            padding: 8px 10px;
             overflow: hidden;
             &.open {
+                transition: cubic-bezier(0.075, 0.82, 0.165, 1);
                 height: initial;
+                .ondernemingsnummer {
+                    position: absolute;
+                    top: -12px;                    
+                    font-size: 12px;
+                    background: #fff;
+                    padding: 0 10px;
+                    right: 8px;
+                    display: initial;
+                }
                 &.editing {
                     .edit {
                       display: block;
@@ -53,13 +63,11 @@
                 left: 0;
                 top: 0;
             }
-            .name span,
-            .description span,
-            .ondernemingsnummer span {
+            .name span {
                 font-weight: 500;
             }
             .name {
-                line-height: 0.8em;                
+                line-height: 1em;                
                 &:hover {
                     cursor: pointer;
                 }
@@ -70,50 +78,34 @@
                 padding: 20px;
             }
             .ondernemingsnummer {
-                position: absolute;
-                bottom: -12px;
-                background: #fff;
-                padding: 0 10px;
-                right: 8px;
+                display: none;
             }
             .status {                
                 position: absolute;
                 right: 8px;
-                top: 8px;
+                top: 16px;
                 img {
                     height: auto;
                     width: 28px;
                 }
             }
             .lastchanged {
-                position: absolute;
-                bottom: 0;
-                right: 8px;
                 font-size: 12px;
                 color: $gray-light;
             }
         }
     }
-    // ul {
-    //     width: 100%;
-    //     max-width: 500px;
-    //     margin: 0 auto;
-    //     padding: 0;
-    //     text-align: left;
-    //     list-style: none;
-    //     li.lijst_item {
-    //         position: relative;
-    //         padding: 5px 10px;
-    //         border-bottom: 1px solid #eee;
-    //         height: 24px;
-    //         overflow: hidden;
-    //         transition: $trans;
-    //         background: $white;
+}
 
-    //         box-shadow: $box-shadow;
-    //         &.open {
-    //             height: initial;
-    //         }
-    //     }
-    // }
+@media screen and (min-width: 320px) {
+    .lastchanged {
+        position: relative;
+    }
+}
+@media screen and (min-width: 768px) {
+    .lastchanged {
+        position: absolute;
+        bottom: 0;
+        right: 8px;
+    }
 }

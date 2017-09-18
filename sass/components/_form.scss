@@ -59,17 +59,17 @@ form {
         }
     }
     &.edit {
-        padding: 8px 0;
+        padding: 16px 0;
         input,
         textarea {
             color: $text;
         }
         input {
-            width: calc(100% - 60px);
+            width: calc(100% - 22px);
             padding: 4px 10px;
         }
         textarea {
-            width: calc(100% - 60px);
+            width: calc(100% - 22px);
             padding: 4px 10px;
         }
     }
