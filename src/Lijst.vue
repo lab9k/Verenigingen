@@ -90,7 +90,6 @@ export default {
   },
   mounted: function() {
     this.lijst = Object.values(this.$root.verenigingList)
-    console.log(this.editingListItem);
   },
   methods: {
     editItem: function(item) {
