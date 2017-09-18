@@ -10,29 +10,55 @@
           </button>
         </div>
         <div class="list-wrapper">
-          <div class="list_item" v-bind:class="{ open: (activeListItem == item.id) }" v-on:click.self="toggleCollapse(item.id)" v-for="item in lijst" :key='parseInt(item.id)'>
-            <div class="border-left" v-on:click.self="toggleCollapse(item.id)"></div>
-            <div class="name" v-on:click.self="toggleCollapse(item.id)">
-              <strong v-on:click.self="toggleCollapse(item.id)">{{ item.naam }}</strong>
+          <div class="list_item" v-bind:class="{ open: (activeListItem == item.id), editing: (item.id == editingListItem)  }" v-on:click.self="toggleCollapse(item.id)" v-for="item in lijst" :key='parseInt(item.id)'>
+            <div class="view">
+              <div class="border-left" v-on:click.self="toggleCollapse(item.id)"></div>
+              <div class="name" v-on:click.self="toggleCollapse(item.id)">
+                <strong v-on:click.self="toggleCollapse(item.id)">{{ item.naam }}</strong>
+              </div>
+              <div class="ondernemingsnummer">
+                Ondernemingsnummer:
+                <span>{{ item.ondernemingsnummer }}</span>
+              </div>
+              <div>
+                {{item.lastChange}}
+              </div>
+              <div class="description">{{ item.beschrijving }}</div>
+              <div class="status">
+                <img v-bind:src="'assets/' + item.status + '.svg'" alt="Accepted" title="Status">
+              </div>
+              <button v-on:click='$root.acceptRequest(item.id)'>
+                goedkeuren
+              </button>
+              <button v-on:click='$root.denyRequest(item.id)'>
+                afkeuren
+              </button>
+              <button v-on:click="editItem(item)">edit</button>
             </div>
-            <div class="ondernemingsnummer">
-              Ondernemingsnummer:
-              <span>{{ item.ondernemingsnummer }}</span>
+            <div class="edit" action="post">
+              <div class="border-left" v-on:click.self="toggleCollapse(item.id)"></div>
+              <div class="name" >
+                Naam:
+                <input v-model="unsubmitted.naam">
+              </div>
+              <div class="ondernemingsnummer">
+                Ondernemingsnummer:
+                <input v-model="unsubmitted.ondernemingsnummer">
+              </div>
+              <div class="description">
+                Beschrijving:
+                <input v-model="unsubmitted.beschrijving" >
+              </div>
+              <div class="status">
+                <img v-bind:src="'assets/' + item.status + '.svg'" alt="Accepted" title="Status">
+              </div>
+              <button v-on:click="editVereniging(item)">
+                Opslaan
+              </button>
+              <button v-on:click='editItem(item)'>
+                Ongedaan maken
+              </button>
             </div>
-            <div>
-              {{item.lastChange}}
-            </div>
-            <div class="description">{{ item.beschrijving }}</div>
-            <div class="status">
-              <img v-bind:src="'assets/' + item.status + '.svg'" alt="Accepted" title="Status">
-            </div>
-            <button v-on:click='$root.acceptRequest(item.id)'>
-              goedkeuren
-            </button>
-            <button v-on:click='$root.denyRequest(item.id)'>
-              afkeuren
-            </button>
-            <button v-on:click="changeToInput($event,item.id)">edit</button>
           </div>
         </div>
       </div>
@@ -57,14 +83,25 @@ export default {
     return {
       title: 'Lijst',
       activeListItem: -1,
-      editingListItem: null,
-      lijst: [],
+      editingListItem: -1,
+      unsubmitted: {},
+      lijst: []
     }
   },
   mounted: function() {
     this.lijst = Object.values(this.$root.verenigingList)
+    console.log(this.editingListItem);
   },
   methods: {
+    editItem: function(item) {
+      if (this.editingListItem == item.id) {
+        this.editingListItem = -1,
+        this.unsubmitted = {}
+      } else {
+        this.editingListItem = item.id,
+        this.unsubmitted = Object.assign({}, item);
+      }
+    },
     toggleCollapse: function(id) {
       if (this.activeListItem == id) {
         this.activeListItem = -1
@@ -84,8 +121,9 @@ export default {
         return post.naam.toLowerCase().includes(this.search.toLowerCase())
       })
     },
-    editVereniging: function(id, naam, beschrijving, ondernemingsnummer) {
-      this.$root.editVereniging(id, naam, ondernemingsnummer, beschrijving)
+    editVereniging: function(item) {
+      this.$root.editVereniging(item.id, this.unsubmitted.naam, this.unsubmitted.ondernemingsnummer, this.unsubmitted.beschrijving)
+      this.editItem(item)
     },
   }
 }
