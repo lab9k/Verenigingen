@@ -11,70 +11,67 @@
 				<input @input="updateLijst" type="text" v-model="search" placeholder="Search title.." />
 			</div>
 			<div class="list-wrapper">
-			<div class="list_item" v-bind:class="{ open: (activeListItem == item.id), editing: (item.id == editingListItem)  }" v-on:click.self="toggleCollapse(item.id)" v-for="item in lijst" :key='parseInt(item.id)'>
-				<div class="view">
-					<div class="border-left" v-on:click.self="toggleCollapse(item.id)"></div>
-					
-					<div class="name" v-on:click.self="toggleCollapse(item.id)">
-						<h3 v-on:click.self="toggleCollapse(item.id)">{{ item.naam }}</h3>
-					</div>
-
-							<div class="name" v-on:click.self="toggleCollapse(item.id)">
-								<h3 v-on:click.self="toggleCollapse(item.id)">{{ item.naam }}</h3>
-							</div>
-
-							<div class="description">
-								<em>{{ item.beschrijving }}</em>
-								<div class="ondernemingsnummer">
-									<span>Ondernemingsnummer:</span>
-									<em>{{ item.ondernemingsnummer }}</em>
-								</div>
-							</div>
-
-					<div class="status">
-						<img v-bind:src="'assets/' + item.status + '.svg'" alt="Accepted" title="Status">
-					</div>
-					<div class="actions">
-						<button class="y" v-on:click='$root.acceptRequest(item.id)'>
-							<i class="ion-checkmark"></i> Goedkeuren
-						</button>
-
-						<button class="n" v-on:click='$root.denyRequest(item.id)'>
-							<i class="ion-close"></i> Afkeuren
-						</button>
-
-						<button class="e" v-on:click="editItem(item)">
-							<i class="ion-edit"></i> Edit
-						</button>
+				<div class="list_item" v-bind:class="{ open: (activeListItem == item.id), editing: (item.id == editingListItem)  }" v-on:click.self="toggleCollapse(item.id)" v-for="item in lijst" :key='parseInt(item.id)'>
+					<div class="view">
+						<div class="border-left" v-on:click.self="toggleCollapse(item.id)"></div>
 						
-					</div>
+						<div class="name" v-on:click.self="toggleCollapse(item.id)">
+							<h3 v-on:click.self="toggleCollapse(item.id)">{{ item.naam }}</h3>
+						</div>
+						<div class="name" v-on:click.self="toggleCollapse(item.id)">
+							<h3 v-on:click.self="toggleCollapse(item.id)">{{ item.naam }}</h3>
+						</div>
+						<div class="description">
+							<em>{{ item.beschrijving }}</em>
+							<div class="ondernemingsnummer">
+								<span>Ondernemingsnummer:</span>
+								<em>{{ item.ondernemingsnummer }}</em>
+							</div>
+						</div>
 
-				</div>
-				<form class="edit">
-					<div class="border-left" v-on:click.self="toggleCollapse(item.id)"></div>
-					<div class="name-edit" >
-						<strong>Naam</strong>
-						<input v-model="unsubmitted.naam"/>
+						<div class="status">
+							<img v-bind:src="'assets/' + item.status + '.svg'" alt="Accepted" title="Status">
+						</div>
+						<div class="actions">
+							<button class="y" v-on:click='$root.acceptRequest(item.id)'>
+								<i class="ion-checkmark"></i> Goedkeuren
+							</button>
+							<button class="n" v-on:click='$root.denyRequest(item.id)'>
+								<i class="ion-close"></i> Afkeuren
+							</button>
+							<button class="e" v-on:click="editItem(item)">
+								<i class="ion-edit"></i> Edit
+							</button>
+							
+						</div>
+
 					</div>
-					<div class="ondernemingsnummer-edit">
-						<strong>Ondernemingsnummer</strong>
-						<input v-model="unsubmitted.ondernemingsnummer"/>
-					</div>
-					<div class="description-edit">
-						<strong>Beschrijving</strong>
-						<textarea v-model="unsubmitted.beschrijving" rows="5"/>
-					</div>
-					<div class="status">
-						<img v-bind:src="'assets/' + item.status + '.svg'" alt="Accepted" title="Status">
-					</div>
-					<div class="actions">
-						<button class="y" v-on:click="editVereniging(item)">
-							<i class="ion-checkmark"></i> Opslaan
-						</button>
-						<button class="n" v-on:click='editItem(item)'>
-							<i class="ion-close"></i> Ongedaan maken
-						</button>
-					</div>
+					<form class="edit">
+						<div class="border-left" v-on:click.self="toggleCollapse(item.id)"></div>
+						<div class="name-edit" >
+							<strong>Naam</strong>
+							<input v-model="unsubmitted.naam"/>
+						</div>
+						<div class="ondernemingsnummer-edit">
+							<strong>Ondernemingsnummer</strong>
+							<input v-model="unsubmitted.ondernemingsnummer"/>
+						</div>
+						<div class="description-edit">
+							<strong>Beschrijving</strong>
+							<textarea v-model="unsubmitted.beschrijving" rows="5"/>
+						</div>
+						<div class="status">
+							<img v-bind:src="'assets/' + item.status + '.svg'" alt="Accepted" title="Status">
+						</div>
+						<div class="actions">
+							<button class="y" v-on:click="editVereniging(item)">
+								<i class="ion-checkmark"></i> Opslaan
+							</button>
+							<button class="n" v-on:click='editItem(item)'>
+								<i class="ion-close"></i> Ongedaan maken
+							</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -88,6 +85,7 @@
 				<a href="https://stad.gent" target="_blank"><img src="assets/partners/partner-stadgent.svg" alt=""></a>
 			</div>
 		</footer>
+	</div>
 	</div>
 </template>
 
