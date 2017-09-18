@@ -1,13 +1,14 @@
 	<template>
 	<div id="lijst">
 		<div class="content">
-		<h2>{{ title }}</h2>
+		<h2> {{ title }} </h2>
+
 		<div class="min-height">
 			<div class="search-wrapper">
-			<input @input="updateLijst" type="text" v-model="search" placeholder="Search title.." />
-			<a class="alleV"v-on:click='toonAlle'>
-				Toon alle verenigingen
-			</a>
+				<a class="alleV"v-on:click='toonAlle'>
+					<i class="ion-refresh"></i> Toon alles
+				</a>
+				<input @input="updateLijst" type="text" v-model="search" placeholder="Search title.." />
 			</div>
 			<div class="list-wrapper">
 			<div class="list_item" v-bind:class="{ open: (activeListItem == item.id), editing: (item.id == editingListItem)  }" v-on:click.self="toggleCollapse(item.id)" v-for="item in lijst" :key='parseInt(item.id)'>
@@ -36,14 +37,16 @@
 					</div>
 					<div class="actions">
 						<button class="y" v-on:click='$root.acceptRequest(item.id)'>
-							Goedkeuren
+							<i class="ion-checkmark"></i> Goedkeuren
 						</button>
 
 						<button class="n" v-on:click='$root.denyRequest(item.id)'>
-							Afkeuren
+							<i class="ion-close"></i> Afkeuren
 						</button>
 
-						<button class="e" v-on:click="editItem(item)">edit</button>
+						<button class="e" v-on:click="editItem(item)">
+							<i class="ion-edit"></i> Edit
+						</button>
 						
 					</div>
 
@@ -67,10 +70,10 @@
 					</div>
 					<div class="actions">
 						<button class="y" v-on:click="editVereniging(item)">
-							Opslaan
+							<i class="ion-checkmark"></i> Opslaan
 						</button>
 						<button class="n" v-on:click='editItem(item)'>
-							Ongedaan maken
+							<i class="ion-close"></i> Ongedaan maken
 						</button>
 					</div>
 				</form>
