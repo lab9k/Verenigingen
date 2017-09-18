@@ -4,26 +4,29 @@
     margin: 0 auto;
     .min-height {
         min-height: calc(100vh - 425px);
+        position: relative;
     }
-    .search-wrapper input {
-        width: calc(100% - 20px);
-        height: 40px;
-        padding: 5px 10px;
-        border: none;
-        outline: none;
+    .search-wrapper {
+        margin-bottom: 30px;
+        input {
+            width: calc(100% - 20px);
+            height: 40px;
+            padding: 5px 10px;
+            border: none;
+            outline: none;
 
-        box-shadow: $shadow;
+            box-shadow: $shadow;
+        }
     }
     .list-wrapper {
-        background: red;
         text-align: left;
         margin-top: 16px;
         .list_item {
             position: relative;
             background: $white;
             box-shadow: $shadow;
-            height: 36px;
-            padding: 5px;
+            height: 46px;
+            padding: 5px 10px;
             overflow: hidden;
             &.open {
                 height: initial;
@@ -50,17 +53,44 @@
                 left: 0;
                 top: 0;
             }
-            .name {
-                line-height: 2.2em;
+            .name span,
+            .description span,
+            .ondernemingsnummer span {
+                font-weight: 500;
             }
-            .status {
+            .name {
+                line-height: 0.8em;                
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+            .description {                
+                position: relative;
+                border: 1px solid #eee;
+                padding: 20px;
+            }
+            .ondernemingsnummer {
+                position: absolute;
+                bottom: -12px;
+                background: #fff;
+                padding: 0 10px;
+                right: 8px;
+            }
+            .status {                
+                position: absolute;
+                right: 8px;
+                top: 8px;
                 img {
-                    position: absolute;
-                    right: 8px;
-                    top: 8px;
                     height: auto;
                     width: 28px;
                 }
+            }
+            .lastchanged {
+                position: absolute;
+                bottom: 0;
+                right: 8px;
+                font-size: 12px;
+                color: $gray-light;
             }
         }
     }
