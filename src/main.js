@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import contract from './contract'
 
+
 new Vue({
   el: '#app',
   data () {
