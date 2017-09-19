@@ -20,18 +20,18 @@ new Vue({
         self.checkIfAdmin = result
       }
     })
-    var event = contract.statuschangedEvent(function(error, result) {
+    var event = contract.StatuschangedEvent(function(error, result) {
       if (!error){
         self.verenigingList[result.args.id].status = result.args.status
         self.verenigingList[result.args.id].lastChange = new Date(result.args.datetime * 1000)
       }
     });
-    var event = contract.editVerenigingEvent(function(error, result) {
+    var event = contract.EditVerenigingEvent(function(error, result) {
       if (!error){
         self.verenigingList[result.args.id] = {'naam': result.args._naam, 'ondernemingsnummer': result.args._ondernemingsnummer, 'beschrijving': result.args._beschrijving, 'status': 2, 'lastChange' : new Date(result.args.datetime * 1000), 'id' : result.args.id};
       }
     });
-    var event = contract.addVerenigingEvent(function(error, result) {
+    var event = contract.AddVerenigingEvent(function(error, result) {
       if (!error){
         self.verenigingList[result.args.id] = {'naam': result.args._naam, 'ondernemingsnummer': result.args._ondernemingsnummer, 'beschrijving': result.args._beschrijving, 'status': 2, 'lastChange' : new Date(result.args.datetime * 1000), 'id' : result.args.id};
       }
