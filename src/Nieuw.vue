@@ -18,20 +18,20 @@
 </template>
 
 <script>
-    export default {
-        name: 'nieuw',
-        data() {
-            return {
-                msg: 'Voeg nieuwe vereniging toe'
-            }
-        },
-        methods: {
-            addVereniging: function() {
-                let naam = document.getElementById("new-vereniging-naam").value;
-                let ondernemingsnummer = document.getElementById("new-vereniging-ondernemingsnummer").value;
-                let beschrijving = document.getElementById("new-vereniging-beschrijving").value;
-                this.$root.addVereniging(naam, ondernemingsnummer, beschrijving)
-            }
+export default {
+    name: 'nieuw',
+    data() {
+        return {
+            msg: 'Voeg nieuwe vereniging toe'
+        }
+    },
+    methods: {
+        addVereniging: function() {
+            let naam = document.getElementById("new-vereniging-naam").value;
+            let ondernemingsnummer = document.getElementById("new-vereniging-ondernemingsnummer").value;
+            let beschrijving = document.getElementById("new-vereniging-beschrijving").value;
+            this.$root.addVereniging(naam, ondernemingsnummer, beschrijving, "");
         }
     }
+}
 </script>
