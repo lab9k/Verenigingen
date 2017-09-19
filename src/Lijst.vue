@@ -18,9 +18,6 @@
 						<div class="name" v-on:click.self="toggleCollapse(item.id)">
 							<h3 v-on:click.self="toggleCollapse(item.id)">{{ item.naam }}</h3>
 						</div>
-						<div class="name" v-on:click.self="toggleCollapse(item.id)">
-							<h3 v-on:click.self="toggleCollapse(item.id)">{{ item.naam }}</h3>
-						</div>
 						<div class="description">
 							<em>{{ item.beschrijving }}</em>
 							<div class="ondernemingsnummer">
