@@ -29,14 +29,13 @@ form {
         height: 30px;
     }
     button {
-        font-weight: 900;
+        font-size: 14px;
+        font-weight: 400;
         height: 40px;
         border: none;
-        opacity: 0.9;
         margin-top: 8px;
         &:hover {
             transition: $trans;
-            opacity: 1;
             cursor: pointer;
         }
     }
