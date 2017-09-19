@@ -14,7 +14,7 @@
 				<div class="list_item" v-bind:class="{ open: (activeListItem == item.id), editing: (item.id == editingListItem)  }" v-on:click.self="toggleCollapse(item.id)" v-for="item in lijst" :key='parseInt(item.id)'>
 					<div class="view">
 						<div class="border-left" v-on:click.self="toggleCollapse(item.id)"></div>
-						
+
 						<div class="name" v-on:click.self="toggleCollapse(item.id)">
 							<h3 v-on:click.self="toggleCollapse(item.id)">{{ item.naam }}</h3>
 						</div>
@@ -42,9 +42,7 @@
 							<button class="e" v-on:click="editItem(item)">
 								<i class="ion-edit"></i> Edit
 							</button>
-							
 						</div>
-
 					</div>
 					<form class="edit">
 						<div class="border-left" v-on:click.self="toggleCollapse(item.id)"></div>
