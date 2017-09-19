@@ -15,11 +15,11 @@
             <label for="contactperson-name">Naam Contactpersoon</label>
             <input type="text" id="contactperson-name">
 
-            <label for="contactpersoon-email">Emailadres</label>
-            <input type="text" id="contactpersoon-email">
+            <label for="contactperson-email">Emailadres</label>
+            <input type="text" id="contactperson-email">
 
-            <label for="contactpersoon-number">Telefoonnummer</label>
-            <input type="text" id="contactpersoon-number">
+            <label for="contactperson-number">Telefoonnummer</label>
+            <input type="text" id="contactperson-number">
 
             <button id="addVerenigingBtn" v-on:click="addVereniging">Voeg Toe!</button>
         </form>
