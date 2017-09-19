@@ -33,9 +33,9 @@ contract VerenigingenContract is Owned {
 
     enum Status {NULL, ACCEPTED, PENDING, DENIED }
 
-    event addVerenigingEvent(uint id, string _naam, string _ondernemingsnummer, string _beschrijving, uint datetime);
-    event editVerenigingEvent(uint id, string _naam, string _ondernemingsnummer, string _beschrijving, uint datetime);
-    event statuschangedEvent(uint id, Status status, uint datetime);
+    event AddVerenigingEvent(uint id, string _naam, string _ondernemingsnummer, string _beschrijving, uint datetime);
+    event EditVerenigingEvent(uint id, string _naam, string _ondernemingsnummer, string _beschrijving, uint datetime);
+    event StatuschangedEvent(uint id, Status status, uint datetime);
 
     struct Vereniging {
         string naam;
@@ -43,6 +43,7 @@ contract VerenigingenContract is Owned {
         string beschrijving;
         Status status;
         uint lastChange;
+        string contactGegevens;
     }
     uint public numVerenigingen = 0;
     mapping(uint => Vereniging) verenigingen;
@@ -57,7 +58,7 @@ contract VerenigingenContract is Owned {
         }
         verenigingen[id].status = Status.ACCEPTED;
         verenigingen[id].lastChange = now;
-        statuschangedEvent(id, Status.ACCEPTED, now);
+        StatuschangedEvent(id, Status.ACCEPTED, now);
     }
 
     function denyRequest(uint id) isAdmin {
@@ -66,18 +67,29 @@ contract VerenigingenContract is Owned {
         }
         verenigingen[id].status = Status.DENIED;
         verenigingen[id].lastChange = now;
-        statuschangedEvent(id, Status.DENIED, now);
+        StatuschangedEvent(id, Status.DENIED, now);
     }
 
-    function addVereniging(string _naam, string _ondernemingsnummer, string _beschrijving) isAdmin {
+    function addVereniging(
+        string _naam,
+        string _ondernemingsnummer,
+        string _beschrijving,
+        string _contactGegevens) isAdmin
+        {
         verenigingen[numVerenigingen] = Vereniging({
             naam:_naam,
             ondernemingsnummer:_ondernemingsnummer,
             beschrijving:_beschrijving,
             status:Status.PENDING,
-            lastChange:now
+            lastChange:now,
+            contactGegevens:_contactGegevens
         });
-        addVerenigingEvent(numVerenigingen, _naam, _ondernemingsnummer, _beschrijving, now);
+        AddVerenigingEvent(
+            numVerenigingen,
+            _naam,
+            _ondernemingsnummer,
+            _beschrijving,
+            now);
         numVerenigingen++;
     }
 
@@ -87,21 +99,30 @@ contract VerenigingenContract is Owned {
         string _ondernemingsnummer,
         string _beschrijving) isAdmin
         {
-        if(bytes(_naam).length != 0) {
-          verenigingen[id].naam = _naam;
+        if (bytes(_naam).length != 0) {
+            verenigingen[id].naam = _naam;
         }
-        if(bytes(_ondernemingsnummer).length != 0) {
-          verenigingen[id].ondernemingsnummer = _ondernemingsnummer;
+        if (bytes(_ondernemingsnummer).length != 0) {
+            verenigingen[id].ondernemingsnummer = _ondernemingsnummer;
         }
-        if(bytes(_beschrijving).length != 0) {
-          verenigingen[id].beschrijving = _beschrijving;
+        if (bytes(_beschrijving).length != 0) {
+            verenigingen[id].beschrijving = _beschrijving;
         }
         verenigingen[id].status = Status.PENDING;
         verenigingen[id].lastChange = now;
-        editVerenigingEvent(id, verenigingen[id].naam,verenigingen[id].ondernemingsnummer, verenigingen[id].beschrijving, now);
+        EditVerenigingEvent(
+            id,
+            verenigingen[id].naam,
+            verenigingen[id].ondernemingsnummer,
+            verenigingen[id].beschrijving,
+            now);
     }
 
     function getVereniging(uint id) constant returns(string, string, string, Status, uint, uint) {
         return (verenigingen[id].naam,verenigingen[id].ondernemingsnummer,verenigingen[id].beschrijving,verenigingen[id].status,verenigingen[id].lastChange, id);
+    }
+
+    function getContactGegevens(uint id) isAdmin constant returns (string) {
+        return verenigingen[id].contactGegevens;
     }
 }
