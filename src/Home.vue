@@ -29,7 +29,7 @@
 
         <footer>
             <p>&copy Copyright - Lab9K</p>
-            <p><a href="">GitHub</a></p>
+            <p><a href="https://github.com/lab9k/verenigingen"><i class="ion-social-github"></i></a></p>
             <div class="partners">
                 <a href="https://lab9k.github.io/" target="_blank"><img src="assets/partners/partner-lab9k.svg" alt="Lab9K"></a>
                 <a href="https://stad.gent" target="_blank"><img src="assets/partners/partner-stadgent.svg" alt="Stad Gent"></a>

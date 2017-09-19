@@ -45,5 +45,5 @@ Meer info: https://stad.gent/cultuur-sport-vrije-tijd/producten/erkenning-sociaa
 * lijst alle verenigingen met verschillende acceptatiestatus (publiek) 
 
 # Level 5
-## File upload voor amdmin
+## File upload voor admin
 * Bij acceptatie loadt de admin ook en pdf van het gemeentebesluit op.

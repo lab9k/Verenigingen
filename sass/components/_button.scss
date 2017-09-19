@@ -26,13 +26,14 @@ a {
             margin-right: 8px;
         }
         &:hover {
+            transition: $trans;
             background: darken($primary, 10%);
             transition: cubic-bezier(0.075, 0.82, 0.165, 1);
             transition-duration: .5s;
             cursor: pointer;
-            i {
-                transform: rotate(180deg);
-                transform-origin: center;
+            i::before {
+                transition: $trans;
+                transform: rotate(360deg);
             }
         }
     }
@@ -40,6 +41,7 @@ a {
 .actions {
     margin-top: 16px;
     margin-bottom: 2px;
+    display: flex;
     button {
         color: $white;
         border: none;
@@ -64,7 +66,29 @@ a {
             }
         }
         &:hover {
+            transition: $trans;
             cursor: pointer;
+        }
+    }
+}
+
+@media screen and (min-width: 320px) {
+    .actions {
+        flex-direction: column;
+        button.y,
+        button.n,
+        button.e {
+            margin-right: 0;
+        }
+    }
+}
+@media screen and (min-width: 480px) {
+    .actions {
+        flex-direction: row;
+        button.y,
+        button.n,
+        button.e {
+            margin-right: 16px;
         }
     }
 }

@@ -3,19 +3,41 @@
     max-width: 800px;
     margin: 0 auto;
     .min-height {
-        min-height: calc(100vh - 439px);
+        min-height: calc(100vh - 492px);
         position: relative;
     }
     .search-wrapper {
         margin-bottom: 30px;
-        input {
-            width: calc(100% - 20px);
-            height: 40px;
-            padding: 5px 10px;
-            border: none;
-            outline: none;
-
-            box-shadow: $shadow;
+        .input-search {
+            position: relative;
+            input {
+                width: calc(100% - 20px);
+                height: 40px;
+                padding: 5px 10px;
+                border: 1px solid $gray-light;
+                outline: none;
+                &:hover,
+                &:focus {
+                    transition: $trans;
+                    box-shadow: $shadow;
+                }
+                &:focus {                
+                    transition: border .5s;
+                    border: 1px solid $primary;
+                    &+i {                        
+                        transition: $trans;
+                        color: $primary;
+                    }
+                }
+            }
+            i {
+                position: absolute;
+                font-size: 18px;
+                line-height: 52px;
+                top: 0;
+                right: 16px;
+                color: $gray-light;
+            }
         }
     }
     .list-wrapper {
@@ -29,7 +51,8 @@
             padding: 8px 10px;
             overflow: hidden;
             &.open {
-                transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+                transition: $trans;
+                margin: 16px 0;
                 height: initial;
                 .ondernemingsnummer {
                     position: absolute;
