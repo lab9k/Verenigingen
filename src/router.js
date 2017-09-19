@@ -20,7 +20,6 @@ const routes = [
   { path: '/admin/nieuw', component: Nieuw, name: 'adminnieuw', meta:{requireAdmin: true, redirect: '/nieuw'}}]
 
 const router = new VueRouter({
-   mode: 'history',
   routes: routes,
 })
 
@@ -32,7 +31,6 @@ contract.checkIfAdmin(web3.eth.accounts[0], function(error, result){
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(isAdmin);
   if(to.meta.requireAdmin){
     if(isAdmin){
       next()
