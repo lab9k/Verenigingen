@@ -9,6 +9,6 @@ $white: #fff;
 $gray-lightest: #eaeaea;
 $gray-light: #C7CED8;
 
-$shadow: 0 0 5px rgba(0, 0, 0, .35);
+$shadow: 2px 2px 5px rgba(0,0,0,0.15);
 
-$trans: cubic-bezier(0.075, 0.82, 0.165, 1);
+$trans: all 512ms cubic-bezier(0.075, 0.82, 0.165, 1);

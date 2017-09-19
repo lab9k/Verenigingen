@@ -8,7 +8,10 @@
 				<a class="alleV"v-on:click='toonAlle'>
 					<i class="ion-refresh"></i> Toon alles
 				</a>
-				<input @input="updateLijst" type="text" v-model="search" placeholder="Search title.." />
+				<div class="input-search">
+					<input @input="updateLijst" type="text" v-model="search" placeholder="Search title.." />
+					<i class="ion-ios-search-strong"></i>
+				</div>
 			</div>
 			<div class="list-wrapper">
 				<div class="list_item" v-bind:class="{ open: (activeListItem == item.id), editing: (item.id == editingListItem)  }" v-on:click.self="toggleCollapse(item.id)" v-for="item in lijst" :key='parseInt(item.id)'>
@@ -74,9 +77,7 @@
 		</div>
 		<footer>
 			<p>&copy Copyright - Lab9K</p>
-			<p>
-				<a href="">GitHub</a>
-			</p>
+			<p><a href="https://github.com/lab9k/verenigingen"><i class="ion-social-github"></i></a></p>
 			<div class="partners">
 				<a href="https://lab9k.github.io/" target="_blank"><img src="assets/partners/partner-lab9k.svg" alt=""></a>
 				<a href="https://stad.gent" target="_blank"><img src="assets/partners/partner-stadgent.svg" alt=""></a>
