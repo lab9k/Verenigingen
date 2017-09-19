@@ -1,47 +1,24 @@
 import Vue from 'vue'
 import App from './App.vue'
-import Home from './Home.vue'
-import Lijst from './Lijst.vue'
-import Nieuw from './Nieuw.vue'
-import Contact from './Contact.vue'
-import VueRouter from 'vue-router'
-
-Vue.use(VueRouter);
-
-
-const routes = [
-  { path: '/', component: Home },
-  { path: '/lijst', component: Lijst },
-  { path: '/nieuw', component: Nieuw },
-  { path: '/contact', component: Contact }]
-
-// 3. Create the router instance and pass the `routes` option
-// You can pass in additional options here, but let's
-// keep it simple for now.
-const router = new VueRouter({
-  routes: routes,
-})
-
-const config = {
-    dappInterface:[{"constant":false,"inputs":[{"name":"_admin","type":"address"}],"name":"removeAdmin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"acceptRequest","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"id","type":"uint256"}],"name":"getVereniging","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"uint8"},{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newAdmin","type":"address"}],"name":"addAdmin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"denyRequest","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_naam","type":"string"},{"name":"_ondernemingsnummer","type":"string"},{"name":"_beschrijving","type":"string"}],"name":"addVereniging","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"numVerenigingen","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_addr","type":"address"}],"name":"checkIfAdmin","outputs":[{"name":"admin","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"},{"name":"_naam","type":"string"},{"name":"_ondernemingsnummer","type":"string"},{"name":"_beschrijving","type":"string"}],"name":"editVereniging","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"id","type":"uint256"},{"indexed":false,"name":"_naam","type":"string"},{"indexed":false,"name":"_ondernemingsnummer","type":"string"},{"indexed":false,"name":"_beschrijving","type":"string"},{"indexed":false,"name":"datetime","type":"uint256"}],"name":"addVerenigingEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"id","type":"uint256"},{"indexed":false,"name":"_naam","type":"string"},{"indexed":false,"name":"_ondernemingsnummer","type":"string"},{"indexed":false,"name":"_beschrijving","type":"string"},{"indexed":false,"name":"datetime","type":"uint256"}],"name":"editVerenigingEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"id","type":"uint256"},{"indexed":false,"name":"status","type":"uint8"},{"indexed":false,"name":"datetime","type":"uint256"}],"name":"statuschangedEvent","type":"event"}],
-    contractAddress: "0xe01e1739d04a029091f948693c55440d2a2f4768",
-}
-if (typeof web3 !== "undefined") {
-    // Use MetaMask's provider
-    window.web3 = new Web3(web3.currentProvider);
-}
-const contract = web3.eth.contract(config.dappInterface).at(config.contractAddress);
+import router from './router'
+import contract from './contract'
 
 new Vue({
-  el: '#page',
+  el: '#app',
   data () {
     return {
       verenigingList: {},
+      isAdmin: false
     }
   },
   created: function() {
     this.fetchVerenigingenLijst();
     var self = this;
+    contract.checkIfAdmin(web3.eth.accounts[0], function(error, result){
+      if(!error){
+        self.checkIfAdmin = result
+      }
+    })
     var event = contract.statuschangedEvent(function(error, result) {
       if (!error){
         self.verenigingList[result.args.id].status = result.args.status

@@ -1,4 +1,4 @@
-	<template>
+<template>
 	<div id="lijst">
 		<div class="content">
 		<h2> {{ title }} </h2>
@@ -17,7 +17,6 @@
 				<div class="list_item" v-bind:class="{ open: (activeListItem == item.id), editing: (item.id == editingListItem)  }" v-on:click.self="toggleCollapse(item.id)" v-for="item in lijst" :key='parseInt(item.id)'>
 					<div class="view">
 						<div class="border-left" v-on:click.self="toggleCollapse(item.id)"></div>
-						
 						<div class="name" v-on:click.self="toggleCollapse(item.id)">
 							<h3 v-on:click.self="toggleCollapse(item.id)">{{ item.naam }}</h3>
 						</div>
@@ -30,7 +29,7 @@
 						</div>
 
 						<div class="status">
-							<img v-bind:src="'assets/' + item.status + '.svg'" alt="Accepted" title="Status">
+							<img v-bind:src="'/assets/' + item.status + '.svg'" alt="Accepted" title="Status">
 						</div>
 						<div class="actions">
 							<button class="y" v-on:click='$root.acceptRequest(item.id)'>
@@ -42,9 +41,7 @@
 							<button class="e" v-on:click="editItem(item)">
 								<i class="ion-edit"></i> Edit
 							</button>
-							
 						</div>
-
 					</div>
 					<form class="edit">
 						<div class="border-left" v-on:click.self="toggleCollapse(item.id)"></div>
@@ -61,7 +58,7 @@
 							<textarea v-model="unsubmitted.beschrijving" rows="5"/>
 						</div>
 						<div class="status">
-							<img v-bind:src="'assets/' + item.status + '.svg'" alt="Accepted" title="Status">
+							<img v-bind:src="'/	assets/' + item.status + '.svg'" alt="Accepted" title="Status">
 						</div>
 						<div class="actions">
 							<button class="y" v-on:click="editVereniging(item)">
@@ -79,26 +76,26 @@
 			<p>&copy Copyright - Lab9K</p>
 			<p><a href="https://github.com/lab9k/verenigingen"><i class="ion-social-github"></i></a></p>
 			<div class="partners">
-				<a href="https://lab9k.github.io/" target="_blank"><img src="assets/partners/partner-lab9k.svg" alt=""></a>
-				<a href="https://stad.gent" target="_blank"><img src="assets/partners/partner-stadgent.svg" alt=""></a>
-				<a href="https://digipolis.be" target="_blank"><img src="assets/partners/partner-digipolis.png" alt=""></a>
+				<a href="https://lab9k.github.io/" target="_blank"><img src="/assets/partners/partner-lab9k.svg" alt=""></a>
+				<a href="https://stad.gent" target="_blank"><img src="/assets/partners/partner-stadgent.svg" alt=""></a>
+				<a href="https://digipolis.be" target="_blank"><img src="/assets/partners/partner-digipolis.png" alt=""></a>
 			</div>
 		</footer>
 	</div>
 	</div>
 </template>
 
-	<script>
-export default {
-	name: 'lijst',
-	data() {
-		return {
-			title: 'Lijst',
-			activeListItem: -1,
-			editingListItem: -1,
-			unsubmitted: {},
-			lijst: []
-		}
+<script>
+	export default {
+		name: 'lijst',
+		data() {
+			return {
+				title: 'Lijst',
+				activeListItem: -1,
+				editingListItem: -1,
+				unsubmitted: {},
+				lijst: []
+			}
 	},
 	mounted: function() {
 		this.lijst = Object.values(this.$root.verenigingList)
@@ -106,9 +103,7 @@ export default {
 	methods: {
 		timeAgo: function(date) {
 			var seconds = Math.floor((new Date() - date) / 1000);
-
 			var interval = Math.floor(seconds / 31536000);
-
 			if (interval > 1) {
 				return interval + " jaren";
 			}
