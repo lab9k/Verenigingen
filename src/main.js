@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import contract from './contract'
+import CryptoJS from 'crypto-js'
 
 new Vue({
   el: '#app',
@@ -37,8 +38,10 @@ new Vue({
     });
   },
   methods: {
-    addVereniging: function(naam, ondernemingsnummer, beschrijving){
-      contract.addVereniging(naam, ondernemingsnummer, beschrijving, (error, value) => {
+    addVereniging: function(naam, ondernemingsnummer, beschrijving, contactgegevens){
+      var key = require('./config/keys.json')
+      var encrypted = CryptoJS.AES.encrypt(contactgegevens, key).toString();
+      contract.addVereniging(naam, ondernemingsnummer, beschrijving, encrypted, (error, value) => {
         console.log(error);
       });
     },
