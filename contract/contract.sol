@@ -73,9 +73,31 @@ contract VerenigingenContract is Owned {
     function addVereniging(
         string _naam,
         string _ondernemingsnummer,
-        string _beschrijving,
-        string _contactGegevens) isAdmin
+        string _beschrijving) isAdmin
         {
+        verenigingen[numVerenigingen] = Vereniging({
+            naam:_naam,
+            ondernemingsnummer:_ondernemingsnummer,
+            beschrijving:_beschrijving,
+            status:Status.PENDING,
+            lastChange:now,
+            contactGegevens:""
+        });
+        AddVerenigingEvent(
+            numVerenigingen,
+            _naam,
+            _ondernemingsnummer,
+            _beschrijving,
+            now);
+        numVerenigingen++;
+    }
+
+    function addVerenigingPublic(
+        string _naam,
+        string _ondernemingsnummer,
+        string _beschrijving,
+        string _contactGegevens
+    ) {
         verenigingen[numVerenigingen] = Vereniging({
             naam:_naam,
             ondernemingsnummer:_ondernemingsnummer,
