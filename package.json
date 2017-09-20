@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/lab9k/Verenigingen#readme",
   "dependencies": {
+    "crypto-js": "^3.1.9-1",
     "vue": "^2.4.2",
     "vue-router": "^2.7.0"
   },
