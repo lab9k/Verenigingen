@@ -27,6 +27,37 @@ Meer info: https://stad.gent/cultuur-sport-vrije-tijd/producten/erkenning-sociaa
 ### Production mode
     $ npm run-script serve
 
+## Deployment on server
+
+### Create bash file in order to automate the startup of the project  
+    cd /usr/local/bin
+    touch startvereniging.sh
+    vim startvereniging.sh
+    
+    #!/bin/bash
+    ( cd /var/www/html/Verenigingen ; npm run-script serve )
+    exit 0;
+  
+### Configure bash file as a service
+    cd /etc/systemd/system
+    touch verenigingen.service
+    vim verenigingen.service
+    
+    [Service]
+    ExecStart=/usr/local/bin/startverenigingen.sh
+
+    [Install]
+    WantedBy=default.target
+
+### Configure proxy
+    cd /etc/apache2/sites-available
+    touch verenigingen.conf
+    vim verenigingen.conf
+    
+    <VirtualHost *:80>
+        Servername verenigingen.lab9k.gent
+        ProxyPass / http://localhost:8080/
+    </VirtualHost>
 
 # Level 1 
 
