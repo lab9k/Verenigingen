@@ -71,7 +71,9 @@ Meer info: https://stad.gent/cultuur-sport-vrije-tijd/producten/erkenning-sociaa
 ## File upload voor admin
 * Bij acceptatie loadt de admin ook en pdf van het gemeentebesluit op.
 
-# Licence
+# License
+
+[lab9k/Verenigingen is licensed](https://github.com/lab9k/Verenigingen/blob/develop/LICENSE) under the MIT license
 
 # Authors
 
