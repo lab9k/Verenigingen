@@ -44,12 +44,12 @@ new Vue({
       var key = require('./config/keys.json')
       var encrypted = CryptoJS.AES.encrypt(contactgegevens, key).toString();
       contract.addVereniging(naam, ondernemingsnummer, beschrijving, encrypted, (error, value) => {
-        console.log(error);
+        console.error(error);
       });
     },
     editVereniging: function (id, naam, ondernemingsnummer, beschrijving) {
       contract.editVereniging(id, naam, ondernemingsnummer, beschrijving, (error, value) => {
-        console.log(error);
+        console.error(error);
       });
     },
     fetchVerenigingenLijst: function () {
@@ -75,12 +75,12 @@ new Vue({
     },
     acceptRequest: function (id) {
       contract.acceptRequest(id, (error, value) => {
-        console.log(error);
+        console.error(error);
       })
     },
     denyRequest: function (id) {
       contract.denyRequest(id, (error, value) => {
-        console.log(error);
+        console.error(error);
       })
     }
   },
