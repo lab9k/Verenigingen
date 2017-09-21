@@ -35,30 +35,45 @@ Meer info: https://stad.gent/cultuur-sport-vrije-tijd/producten/erkenning-sociaa
     vim startvereniging.sh
     
     #!/bin/bash
-    ( cd /var/www/html/Verenigingen ; npm run-script serve )
+    ( cd /var/www/html/Verenigingen ; npm run-script build; npm run-script serve )
     exit 0;
   
 ### Configure bash file as a service
-    cd /etc/systemd/system
-    touch verenigingen.service
-    vim verenigingen.service
+```
+ cd /etc/systemd/system
+ touch verenigingen.service
+ vim verenigingen.service 
+```
+Voeg het onderstaande toe aan verenigingen.service 
+```
+[Service]
+ExecStart=/usr/local/bin/startverenigingen.sh
+[Install]
+WantedBy=default.target
+```
+Start de verenigingen.service om de service permanent te laten draaien
+```
+systemctl daemon-reload
+systemctl enable verenigingen.service
+```
     
-    [Service]
-    ExecStart=/usr/local/bin/startverenigingen.sh
-
-    [Install]
-    WantedBy=default.target
-
 ### Configure proxy
-    cd /etc/apache2/sites-available
-    touch verenigingen.conf
-    vim verenigingen.conf
-    
-    <VirtualHost *:80>
-        Servername verenigingen.lab9k.gent
-        ProxyPass / http://localhost:8080/
-    </VirtualHost>
-
+```
+cd /etc/apache2/sites-available
+touch verenigingen.conf
+vim verenigingen.conf
+```
+Voeg het onderstaande toe aan verenigingen.conf 
+```    
+<VirtualHost *:80>
+    Servername verenigingen.lab9k.gent
+    ProxyPass / http://localhost:8080/
+</VirtualHost>
+```
+Start of reload apache om de veranderingen door te voeren
+```   
+/etc/init.d/apache2 reload
+```   
 # Level 1 
 
 ## key actor: admin
