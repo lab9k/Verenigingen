@@ -4,7 +4,7 @@
             <div class="info">
                 <img src="assets/logo-verenigingen.svg" alt="" class="logo">
 
-                <router-link to="/admin/lijst">Lijst</router-link>
+                <a href="/#/lijst" class="btn btn-lijst">Lijst met verenigingen</a>
             </div>
 
             <div class="scroll">
@@ -29,10 +29,10 @@
 
         <footer>
             <p>&copy Copyright - Lab9K</p>
-            <p><a href="https://github.com/lab9k/verenigingen"><i class="ion-social-github"></i></a></p>
+            <p><a href="">GitHub</a></p>
             <div class="partners">
                 <a href="https://lab9k.github.io/" target="_blank"><img src="assets/partners/partner-lab9k.svg" alt="Lab9K"></a>
-                <a href="https://stad.gent" target="_blank"><img src="assets/partners/partner-stadgent.svg" alt="Stad Gent"></a>
+                <a href="https://stad.gent" target="_blank"><img src="assets/partners/partner-stadgent.svg" alt="Stad Gent"></a>                
                 <a href="https://digipolis.be" target="_blank"><img src="assets/partners/partner-digipolis.png" alt="digipolis"></a>
             </div>
         </footer>
@@ -44,3 +44,4 @@
         name: 'app'
     }
 </script>
+

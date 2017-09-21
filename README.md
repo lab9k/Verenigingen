@@ -5,29 +5,6 @@ Dit experiment bekijkt of het mogelijk is om een centrale lijst bij te houden va
 
 Meer info: https://stad.gent/cultuur-sport-vrije-tijd/producten/erkenning-sociaal-culturele-verenigingen
 
-# Getting started
-
-## prerequisites
-
-* nodejs
-* npm
-* Metamask with working wallet (Rinkeby network)
-
-## Installation
-
-    $ git clone https://github.com/lab9k/Verenigingen.git
-    $ cd Verenigingen/
-    $ npm install
-
-## Running
-
-### Dev mode
-    $ npm run-script dev
-
-### Production mode
-    $ npm run-script serve
-
-
 # Level 1 
 
 ## key actor: admin
@@ -68,13 +45,5 @@ Meer info: https://stad.gent/cultuur-sport-vrije-tijd/producten/erkenning-sociaa
 * lijst alle verenigingen met verschillende acceptatiestatus (publiek) 
 
 # Level 5
-## File upload voor admin
+## File upload voor amdmin
 * Bij acceptatie loadt de admin ook en pdf van het gemeentebesluit op.
-
-# License
-
-[lab9k/Verenigingen is licensed](https://github.com/lab9k/Verenigingen/blob/develop/LICENSE) under the MIT license
-
-# Authors
-
-* [Lab9k](https://lab9k.github.io) 
