@@ -1,13 +1,5 @@
 footer {
     border-top: 1px solid $gray-lightest;
-    p a i {
-        font-size: 2.2em;
-        color: $primary;
-        &:hover {
-            transition: $trans;
-            color: $sub
-        }
-    }
     img {
         width: 100px;
     }
