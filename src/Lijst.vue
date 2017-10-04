@@ -11,8 +11,8 @@
 				<input @input="updateLijst" type="text" v-model="search" placeholder="Search title.." />
 			</div>
 			<div class="list-wrapper">
-				<div class="list_item" v-bind:class="{ open: (activeListItem == item.id), editing: (item.id == editingListItem)  }" v-on:click.self="toggleCollapse(item.id)" v-for="item in lijst" :key='parseInt(item.id)'>
-					<div class="view">
+				<div class="list_item" v-bind:class="{ open: (activeListItem == item.id), editing: (item.id == editingListItem)  }" v-on:click.self="toggleCollapse(item.id)"  v-for="item in lijst" :key='parseInt(item.id)'>
+					<div class="view" >
 						<div class="border-left" v-on:click.self="toggleCollapse(item.id)"></div>
 						
 						<div class="name" v-on:click.self="toggleCollapse(item.id)">
@@ -29,7 +29,7 @@
 						<div class="status">
 							<img v-bind:src="'assets/' + item.status + '.svg'" alt="Accepted" title="Status">
 						</div>
-						<div class="actions">
+						<!-- <div class="actions">
 							<button class="y" v-on:click='$root.acceptRequest(item.id)'>
 								<i class="ion-checkmark"></i> Goedkeuren
 							</button>
@@ -40,10 +40,10 @@
 								<i class="ion-edit"></i> Edit
 							</button>
 							
-						</div>
+						</div> -->
 
 					</div>
-					<form class="edit">
+					<!-- <form class="edit">
 						<div class="border-left" v-on:click.self="toggleCollapse(item.id)"></div>
 						<div class="name-edit" >
 							<strong>Naam</strong>
@@ -68,7 +68,7 @@
 								<i class="ion-close"></i> Ongedaan maken
 							</button>
 						</div>
-					</form>
+					</form> -->
 				</div>
 			</div>
 		</div>

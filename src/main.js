@@ -6,12 +6,14 @@ import Nieuw from './Nieuw.vue'
 import Contact from './Contact.vue'
 import VueRouter from 'vue-router'
 
+
+
 Vue.use(VueRouter);
 
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/lijst', component: Lijst },
+  { path: '/lijst', component: Home },
+  { path: '/', component: Lijst },
   { path: '/nieuw', component: Nieuw },
   { path: '/contact', component: Contact }]
 
@@ -31,6 +33,11 @@ if (typeof web3 !== "undefined") {
     window.web3 = new Web3(web3.currentProvider);
 }
 const contract = web3.eth.contract(config.dappInterface).at(config.contractAddress);
+
+
+/* Vue.filter('removeNoneAcceptedItems',function(object) {
+  return _.reject(object, (value) => value.status !== 1)
+}) */
 
 new Vue({
   el: '#page',
