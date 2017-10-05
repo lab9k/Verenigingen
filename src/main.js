@@ -5,6 +5,8 @@ import Lijst from './Lijst.vue'
 import Nieuw from './Nieuw.vue'
 import Contact from './Contact.vue'
 import VueRouter from 'vue-router'
+import Web3 from 'web3'
+
 
 
 
@@ -26,18 +28,20 @@ const router = new VueRouter({
 
 const config = {
     dappInterface:[{"constant":false,"inputs":[{"name":"_admin","type":"address"}],"name":"removeAdmin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"acceptRequest","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"id","type":"uint256"}],"name":"getVereniging","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"uint8"},{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newAdmin","type":"address"}],"name":"addAdmin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"denyRequest","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_naam","type":"string"},{"name":"_ondernemingsnummer","type":"string"},{"name":"_beschrijving","type":"string"}],"name":"addVereniging","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"numVerenigingen","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_addr","type":"address"}],"name":"checkIfAdmin","outputs":[{"name":"admin","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"id","type":"uint256"},{"name":"_naam","type":"string"},{"name":"_ondernemingsnummer","type":"string"},{"name":"_beschrijving","type":"string"}],"name":"editVereniging","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"id","type":"uint256"},{"indexed":false,"name":"_naam","type":"string"},{"indexed":false,"name":"_ondernemingsnummer","type":"string"},{"indexed":false,"name":"_beschrijving","type":"string"},{"indexed":false,"name":"datetime","type":"uint256"}],"name":"addVerenigingEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"id","type":"uint256"},{"indexed":false,"name":"_naam","type":"string"},{"indexed":false,"name":"_ondernemingsnummer","type":"string"},{"indexed":false,"name":"_beschrijving","type":"string"},{"indexed":false,"name":"datetime","type":"uint256"}],"name":"editVerenigingEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"id","type":"uint256"},{"indexed":false,"name":"status","type":"uint8"},{"indexed":false,"name":"datetime","type":"uint256"}],"name":"statuschangedEvent","type":"event"}],
-    contractAddress: "0x9ddc38056c23ee0608b3cf90e8d0caea68f28d00",
+    contractAddress: "0x9ddc38056c23ee0608b3cf90e8d0caea68f28d00"
+    //account: "0x28827fb87DC6C70a482A1B3C3dD4FDA6cD499126"
 }
-if (typeof web3 !== "undefined") {
+
+var web3 = new Web3();
+
+ if (typeof web3 !== "undefined") {
     // Use MetaMask's provider
-    window.web3 = new Web3(web3.currentProvider);
+    web3 = new Web3(Web3.givenProvider || "ws://localhost:8546");
 }
-const contract = web3.eth.contract(config.dappInterface).at(config.contractAddress);
+const contract = web3.eth.contract(config.dappInterface).at(config.contractAddress); 
+// set the default account
+//web3.eth.defaultAccount = config.account; 
 
-
-/* Vue.filter('removeNoneAcceptedItems',function(object) {
-  return _.reject(object, (value) => value.status !== 1)
-}) */
 
 new Vue({
   el: '#page',
@@ -87,7 +91,9 @@ new Vue({
         } else {
           resolve(result)
         }
-      }))
+      })).catch(e => {
+        console.log(e);
+    });
     },
     fetchVereniging: function(index) {
       var dict = {}
