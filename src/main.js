@@ -36,11 +36,10 @@ var web3 = new Web3();
 
  if (typeof web3 !== "undefined") {
     // Use MetaMask's provider
-    web3 = new Web3(Web3.givenProvider || "ws://localhost:8546");
+    web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/28CFvZ2PJoIKHUT761RQ"));
 }
 const contract = web3.eth.contract(config.dappInterface).at(config.contractAddress); 
-// set the default account
-//web3.eth.defaultAccount = config.account; 
+
 
 
 new Vue({
