@@ -5,6 +5,10 @@ Dit experiment bekijkt of het mogelijk is om een centrale lijst bij te houden va
 
 Meer info: https://stad.gent/cultuur-sport-vrije-tijd/producten/erkenning-sociaal-culturele-verenigingen
 
+# Live Demo
+* install Metamask plugin and get a working wallet connected to the Rinkeby network
+* click on the following link: https://lab9k.github.io/Verenigingen/
+
 # Getting started
 
 ## prerequisites
