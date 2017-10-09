@@ -753,7 +753,7 @@ function main(
     };
 
     var setupSocket = function() {
-      var url = updateUrl || 'https://localhost:3123';
+      var url = updateUrl || 'http://localhost:3123';
       var socket = socketio(url, {'force new connection': true});
       console.log('[HMR] Attempting websocket connection to', url);
 
